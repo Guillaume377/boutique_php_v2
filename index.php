@@ -15,15 +15,39 @@ include 'head.php';
     ?>
 
     <main>
-        <?php
-        ?>
+        <h1>Boutique</h1>
+        <div class="container-fluid">
+            <div class="row">
+    
+                    <?php
+                    // je déclare la variable qui contient mon tableau d'articles
+                    // sa valeur,c'est le tableau d'articles renvoyé par la fonction getArticles
+                    $articles = getArticles();
+
+                    // je teste cette variable pour vérifier que l'ai bien mes 3 articles
+                    //var_dump($articles);
+
+                    //ou à la place des 2($articles = getArticles() + var_dump($articles)), je mets la fonction plus courte = var_dump(getArticles)
+
+                    //je lance ma boucle pour afficher une card bootstrap par article
+                    foreach ($articles as $article) {
+                        echo "<div class=\"card col-md-4\">
+                                <img src=\"./images/" . $article['picture'] . "\" class=\"card-img-top\" alt=\"...\">
+                                <div class=\"card-body\">
+                                    <h5 class=\"card-title\">" . $article['name'] . "</h5>
+                                    <p class=\"card-text\">" . $article['description'] . "</p>
+                                    <a href=\"#\" class=\"btn btn-primary\">Go somewhere</a>
+                                </div>  
+                            </div>";
+                    }
+                    // Pour faire fonctionner le Foreach, je mets des "" (echo "... et ...</div>";) ainsi qu'un \ avant chaque " .
+
+                    ?>
+               
+            </div>
+        </div>
     </main>
 
     <?php
     include 'footer.php';
     ?>
-
-
-
-
-

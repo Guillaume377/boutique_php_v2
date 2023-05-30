@@ -15,6 +15,7 @@ include 'head.php';
     ?>
 
     <main>
+    <h1>Produit</h1>
         <?php
         ?>
     </main>
