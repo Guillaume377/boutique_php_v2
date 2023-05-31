@@ -45,3 +45,20 @@ function getArticles()
 
     ];
 }
+
+// ****************************************** récupérer le produit  qui correspond à l'id fourni en paramètre ***********************
+
+function getArticleFromId($id) {   //$id : j'aurais pu choisir le nom que je souhaite
+
+    //récupérer la liste des articles
+    $articles = getArticles();
+
+    // aller chercher dedans l'article qui comporte l'id en paramètre
+    foreach ($articles as $article) {
+        if($article['id'] == $id) {
+
+            // le renvoyer avec un return
+            return $article;
+        }
+    }
+}
