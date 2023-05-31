@@ -48,7 +48,7 @@ function getArticles()
 
 // ****************************************** récupérer le produit  qui correspond à l'id fourni en paramètre ***********************
 
-function getArticleFromId($id) {   //$id : j'aurais pu choisir le nom que je souhaite
+function getArticleFromId($id) {   //$id : je peux choisir le nom que je souhaite
 
     //récupérer la liste des articles
     $articles = getArticles();
@@ -62,3 +62,39 @@ function getArticleFromId($id) {   //$id : j'aurais pu choisir le nom que je sou
         }
     }
 }
+// ******************************************* initialiser le panier **************************************************
+
+function createCart()
+{
+    if (isset($_SESSION['panier']) == false) { // si mon panier n'existe pas encore
+        $_SESSION['panier'] = [];              // je l'initialise
+    }
+}
+
+// ****************************************** ajouter l'article au panier et tester le résultat ***********************
+
+function addToCart($article){
+
+    // j'attribue une quantité de 1 (par défaut)  à l'article
+    $article['quantité'] = 1;
+
+    // je vérifie si l'article n'est pas déjà présent en comparant les id
+    // for :
+        //$i = index de la boucle
+        //$i < count($_SESSION['panier']) = condition de maintien de la boucle (évaluée avant chaque tour)
+        //(si condition vraie => on lance la boucle)
+        //$i++ = évolution de l'index $i à la FIN de chaque boucle
+
+    for ($i = 0; $i < count ($_SESSION['panier']); $i++) {            
+
+    // si présent => quantité +1
+        if ($_SESSION['panier'][$i]['id'] == $article['id']) {
+            $_SESSION['panier'][$i]['quantité']++;
+            return; //permet de sortir de la fonction
+        }
+    }
+
+    // si pas présent => ajout classique via array_push
+    array_push($_SESSION['panier'], $article);
+}
+
