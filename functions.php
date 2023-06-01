@@ -76,7 +76,7 @@ function createCart()
 function addToCart($article){
 
     // j'attribue une quantité de 1 (par défaut)  à l'article
-    $article['quantité'] = 1;
+    $article['quantite'] = 1;
 
     // je vérifie si l'article n'est pas déjà présent en comparant les id
     // for :
@@ -89,7 +89,7 @@ function addToCart($article){
 
     // si présent => quantité +1
         if ($_SESSION['panier'][$i]['id'] == $article['id']) {
-            $_SESSION['panier'][$i]['quantité']++;
+            $_SESSION['panier'][$i]['quantite']++;
             return; //permet de sortir de la fonction
         }
     }
@@ -97,4 +97,20 @@ function addToCart($article){
     // si pas présent => ajout classique via array_push
     array_push($_SESSION['panier'], $article);
 }
+
+
+// ***************************************** Calculer le prix total dans le panier ***************************************
+
+function calculerPrixTotal() {
+
+    $prixTotal = 0; //j'initialise le prix à 0.
+
+    foreach ($_SESSION['panier'] as $article) {
+
+        $prixTotal += $article['price']*$article['quantite']; //prix x quantité et cumul du total
+    }
+    return $prixTotal;
+}
+
+
 
