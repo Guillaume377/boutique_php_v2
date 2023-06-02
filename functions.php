@@ -48,14 +48,15 @@ function getArticles()
 
 // ****************************************** récupérer le produit  qui correspond à l'id fourni en paramètre ***********************
 
-function getArticleFromId($id) {   //$id : je peux choisir le nom que je souhaite
+function getArticleFromId($id)
+{   //$id : je peux choisir le nom que je souhaite
 
     //récupérer la liste des articles
     $articles = getArticles();
 
     // aller chercher dedans l'article qui comporte l'id en paramètre
     foreach ($articles as $article) {
-        if($article['id'] == $id) {
+        if ($article['id'] == $id) {
 
             // le renvoyer avec un return
             return $article;
@@ -73,21 +74,22 @@ function createCart()
 
 // ****************************************** ajouter l'article au panier et tester le résultat ***********************
 
-function addToCart($article){
+function addToCart($article)
+{
 
     // j'attribue une quantité de 1 (par défaut)  à l'article
     $article['quantite'] = 1;
 
     // je vérifie si l'article n'est pas déjà présent en comparant les id
     // for :
-        //$i = index de la boucle
-        //$i < count($_SESSION['panier']) = condition de maintien de la boucle (évaluée avant chaque tour)
-        //(si condition vraie => on lance la boucle)
-        //$i++ = évolution de l'index $i à la FIN de chaque boucle
+    //$i = index de la boucle
+    //$i < count($_SESSION['panier']) = condition de maintien de la boucle (évaluée avant chaque tour)
+    //(si condition vraie => on lance la boucle)
+    //$i++ = évolution de l'index $i à la FIN de chaque boucle
 
-    for ($i = 0; $i < count ($_SESSION['panier']); $i++) {            
+    for ($i = 0; $i < count($_SESSION['panier']); $i++) {
 
-    // si présent => quantité +1
+        // si présent => quantité +1
         if ($_SESSION['panier'][$i]['id'] == $article['id']) {
             $_SESSION['panier'][$i]['quantite']++;
             return; //permet de sortir de la fonction
@@ -101,16 +103,60 @@ function addToCart($article){
 
 // ***************************************** Calculer le prix total dans le panier ***************************************
 
-function calculerPrixTotal() {
+function calculerPrixTotal()
+{
 
     $prixTotal = 0; //j'initialise le prix à 0.
 
     foreach ($_SESSION['panier'] as $article) {
 
-        $prixTotal += $article['price']*$article['quantite']; //prix x quantité et cumul du total
+        $prixTotal += $article['price'] * $article['quantite']; //prix x quantité et cumul du total
     }
     return $prixTotal;
 }
 
+// ***************************************** Modifier la quantité de l'article dans le panier ****************************
+function updateQuantity()
+{
 
+    // je boucle sur le panier => je cherche l'article à modifier
+    for ($i = 0; $i < count($_SESSION['panier']); $i++) {
 
+        // dès que je trouve mon article
+        if ($_SESSION['panier'][$i]['id'] == $_POST['modifiedArticleId']) {
+
+            // je remplace son ancienne quantité par la nouvelle
+            $_SESSION['panier'][$i]['quantite'] = $_POST['newQuantity'];
+
+            //j'affiche un message de succès dans une petite fenêtre via Javascript
+            echo "<script> alert(\"Quantité modifiée !\");</script>";
+
+            // je sors de la fonction pour éviter de boucler sur les articles suivants
+            return;
+        }
+    }
+}
+
+// **************************************** Supprimer la quantité de l'article dans le panier ********************************
+
+function removeFromCart()
+{
+    // je boucle sur le panier => je cherche l'article à modifier
+    for ($i = 0; $i < count($_SESSION['panier']); $i++) {
+
+        // dès que je trouve mon article
+        if ($_SESSION['panier'][$i]['id'] == $_POST['deletedArticleId']) {
+            // L'article a été trouvé dans le panier, le supprimer
+            array_splice($_SESSION['panier'], $i, 1);
+            // je sors de la fonction pour éviter de boucler sur les articles suivants
+            return;
+        }
+    }
+}
+
+// ***************************************** Vider le panier ***************************************
+
+function clearCart() {
+    // Vider le panier en supprimant toutes les entrées
+    $_SESSION['panier'] = [];
+  }

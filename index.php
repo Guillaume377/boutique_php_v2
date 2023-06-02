@@ -22,8 +22,9 @@ include 'head.php';
     <main>
         <h1>Boutique</h1>
         <div class="container-fluid">
+            
             <div class="row">
-    
+                <img src="./images/crayons.jpg" class = p-5 alt="tag">
                     <?php
                     // je déclare la variable qui contient mon tableau d'articles
                     // sa valeur,c'est le tableau d'articles renvoyé par la fonction getArticles

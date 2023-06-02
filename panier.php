@@ -38,7 +38,33 @@ include 'head.php';
             //var_dump($_SESSION);
         }
 
-        if (count($_SESSION['panier']) > 0) { //s'il y a au moins 1 élément dans la panier
+        // ****************************************** si je viens d'un changement de quantité  **************************************
+
+        if (isset($_POST['newQuantity'])) {
+            // je déclenche la fonction de chargement de quantité
+            updateQuantity();
+        }
+
+        // ****************************************** si je viens d'un bouton supprimer : je déclenche le retrait *********************
+        if (isset($_POST['deletedArticleId'])) {
+            // je déclenche la fonction de suppression d'un article
+            removeFromCart();
+        }
+
+        // ******************************************* si je veux vider le panier *******************************
+        if (isset($_POST['clearCart'])) {
+            // je déclenche la fonction de suppression d'un article
+            clearCart();
+        }
+
+
+
+
+
+
+
+
+        if (count($_SESSION['panier']) > 0) { //s'il y a au moins 1 élément dans le panier
 
             $total = calculerPrixTotal($_SESSION['panier']);
 
@@ -54,15 +80,45 @@ include 'head.php';
                         <h5 class=\"card-title\">" . $article['name'] . "</h5>
                    </div>
 
-                   <div class=\"col-md-2\">
+                   <div class=\"col-md-1\">
                         <p class=\"card-text\">" . $article['price'] . " €</p>
                    </div>
-                </div>
-            </div>";
-            }
 
+                    <form class=\"col-lg-3\" action=\"panier.php\" method=\"POST\">
+                        <div class=\"row pt-2\">
+                        <input type=\"hidden\" name=\"modifiedArticleId\" value=\"" . $article['id'] . "\">
+                        <input class=\"col-3 offset-2\" type=\"number\" id=\"numberInput\" min=\"1\" max=\"10\" step=\"1\" name=\"newQuantity\" 
+                        value=\"" . $article['quantite'] . "\">
+                        <button type=\"submit\" class=\" clo-5 offset-1 btn btn-btn-light\">
+                            Modifier quantité
+                        </button>
+                        </div>    
+                    </form>
+
+                    <form class=\"col-lg-2\" action=\"panier.php\" method=\"post\">
+                        <input type=\"hidden\" name=\"deletedArticleId\" value=\"" . $article['id'] . "\">
+                        <button type=\"submit\" class=\"btn btn-danger mt-2 mt-lg-0\">
+                            Supprimer
+                        </button>
+                    </form>    
+                 
+                </div>";
+            }
             $total = calculerPrixTotal($_SESSION['panier']);
             echo "Prix total : " . $total . " €";
+
+            // je mets le bouton "vider panier" à l'interieur des {} du if = le bouton apparait seulement s'il y a au moins 1 article dans le panier
+
+            echo "<div class=\"container\"> 
+                    <div class=\"row\">
+                        <form class=\"col-lg-2\" action=\"panier.php\" method=\"post\">
+                            <button type=\"submit\" name=\"clearCart\"  class=\"btn btn-dark mt-2 mt-lg-0\">
+                             Vider panier
+                            </button>
+                        </form>
+                    </div>
+                </div>";
+
         } else {
 
             echo "<p>Votre panier est vide.</p>";
@@ -71,24 +127,24 @@ include 'head.php';
 
 
 
-        echo <div class =>
-        
-        <form method=\"GET\" action=\"produit.php\">
-
-        <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
-
-        <input type=\"submit\" class=\"btn btn-outline-success\" value=\"Modifier la quantité\">
-
-        </form>
 
 
-        <form method=\"GET\" action=\"panier.php\">  
+
+
+
+
+
+        /*<form method=\"GET\" action=\"panier.php\">  
 
         <input type=\"hidden\" name=\"productId\" value=\"" . $_SESSION['panier'] . "\">
 
         <input type=\"submit\" class=\"btn btn-warning\" value=\"Supprimer\">
     
-        </form>
+        </form> */
+
+
+
+
 
         ?>
     </main>
