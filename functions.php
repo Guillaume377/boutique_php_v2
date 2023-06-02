@@ -110,7 +110,7 @@ function calculerPrixTotal()
 
     foreach ($_SESSION['panier'] as $article) {
 
-        $prixTotal += $article['price'] * $article['quantite']; //prix x quantité et cumul du total
+        $prixTotal += $article['price'] * $article['quantite']; //prix multiplié par la quantité + cumul du total
     }
     return $prixTotal;
 }
@@ -157,6 +157,20 @@ function removeFromCart()
 // ***************************************** Vider le panier ***************************************
 
 function clearCart() {
-    // Vider le panier en supprimant toutes les entrées
+    // Vider le panier en supprimant toutes les entrées, tout en conservant l'existence du panier (à la différence du "unset()" qui fait disparaitre le panier)
     $_SESSION['panier'] = [];
   }
+
+// ****************************************** Calculer les frais de port ***************************
+
+function calculerFraisPort() {
+
+    $quantitytotal = 0; //j'initialise le prix à 0.
+
+    foreach ($_SESSION['panier'] as $article) {
+
+        $quantitytotal += $article['quantite']; //j'incrémente ma quantité totale de la quantité de l'article
+    }
+    return $quantitytotal*3; // je multiplie le total d'articles par 3 euros.
+
+}

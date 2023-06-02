@@ -53,13 +53,9 @@ include 'head.php';
 
         // ******************************************* si je veux vider le panier *******************************
         if (isset($_POST['clearCart'])) {
-            // je déclenche la fonction de suppression d'un article
+            // je déclenche la fonction de vider le panier
             clearCart();
         }
-
-
-
-
 
 
 
@@ -107,44 +103,31 @@ include 'head.php';
             $total = calculerPrixTotal($_SESSION['panier']);
             echo "Prix total : " . $total . " €";
 
-            // je mets le bouton "vider panier" à l'interieur des {} du if = le bouton apparait seulement s'il y a au moins 1 article dans le panier
 
-            echo "<div class=\"container\"> 
-                    <div class=\"row\">
-                        <form class=\"col-lg-2\" action=\"panier.php\" method=\"post\">
-                            <button type=\"submit\" name=\"clearCart\"  class=\"btn btn-dark mt-2 mt-lg-0\">
-                             Vider panier
-                            </button>
-                        </form>
-                    </div>
-                </div>";
+        ?>
+            <!----------------------------------------------Bouton qui vide le panier ---------------------------------------------------->
+
+            <!-- je mets le bouton "vider panier" à l'interieur des {} du if = le bouton apparait seulement s'il y a au moins 1 article dans le panier-->
+
+            <form method="POST" action="./panier.php">
+                <button type="submit" name="clearCart" class="btn btn-dark">
+                    Vider panier
+                </button>
+            </form>
+
+            <!-------------------------------------------------Bouton qui valide le panier -------------------------------------------------->
+            <a href="./validation.php">
+                <button class="btn btn-success">
+                    Validation panier
+                </button>
+            </a>
+
+        <?php
 
         } else {
 
             echo "<p>Votre panier est vide.</p>";
         }
-
-
-
-
-
-
-
-
-
-
-
-        /*<form method=\"GET\" action=\"panier.php\">  
-
-        <input type=\"hidden\" name=\"productId\" value=\"" . $_SESSION['panier'] . "\">
-
-        <input type=\"submit\" class=\"btn btn-warning\" value=\"Supprimer\">
-    
-        </form> */
-
-
-
-
 
         ?>
     </main>
