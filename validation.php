@@ -47,29 +47,54 @@ include 'head.php';
                     </div> 
          
                 </div>";
-
             }
             $total = calculerPrixTotal($_SESSION['panier']);
             echo "Prix total : " . $total . " €";
 
             $totalFraisPort = CalculerFraisPort($_SESSION['panier']);
-            echo "Montant total frais de port : " .$totalFraisPort . " €";
+            echo "Montant total frais de port : " . $totalFraisPort . " €";
 
             $totalorder = $total + $totalFraisPort;
-            echo "Total de la commande : " .$totalorder . " €";
+            echo "Total de la commande : " . $totalorder . " €";
         }
 
         ?>
 
-    
-        <form method="POST" action="./index.php">
-            <button type="submit" name="commandeValidee" class="btn btn-success">
-                Valider la commande
-            </button>
-        </form>
+        <!-- Button trigger modal -->
+        <button type="submit" name ="clearCart" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Valider la commande
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Mon panier</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Votre commande a été validée</p>
+                        <!--Afficher le montant total du panier-->
+                        <p> Le montant total est : <?php echo $totalorder . ' € <br>' ?></p>
+                        <p>Merci de votre confiance.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <form method="POST" action="./index.php">
+                                <button type="submit" name="commandeValidee" class="btn btn-dark">
+                                    Retour à l'accueil
+                                </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-        
+
+
+
+
     </main>
 
     <?php
