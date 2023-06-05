@@ -10,7 +10,6 @@ createCart();
 
 //inclure le head avec les balises de base + la balise head (pour ne pas répéter le code qu'il contient)
 include 'head.php';
-
 ?>
 
 <body>
@@ -58,8 +57,6 @@ include 'head.php';
         }
 
 
-
-
         if (count($_SESSION['panier']) > 0) { //s'il y a au moins 1 élément dans le panier
 
             $total = calculerPrixTotal($_SESSION['panier']);
@@ -81,11 +78,11 @@ include 'head.php';
                    </div>
 
                     <form class=\"col-lg-3\" action=\"panier.php\" method=\"POST\">
-                        <div class=\"row pt-2\">
+                        <div class=\"row pt-1\">
                         <input type=\"hidden\" name=\"modifiedArticleId\" value=\"" . $article['id'] . "\">
                         <input class=\"col-3 offset-2\" type=\"number\" id=\"numberInput\" min=\"1\" max=\"10\" step=\"1\" name=\"newQuantity\" 
                         value=\"" . $article['quantite'] . "\">
-                        <button type=\"submit\" class=\" clo-5 offset-1 btn btn-btn-light\">
+                        <button type=\"submit\" class=\" clo-5 offset-2 btn btn-btn-light\">
                             Modifier quantité
                         </button>
                         </div>    
@@ -100,28 +97,36 @@ include 'head.php';
                  
                 </div>";
             }
-            $total = calculerPrixTotal($_SESSION['panier']);
-            echo "Prix total : " . $total . " €";
 
+            $total = calculerPrixTotal($_SESSION['panier']);
 
         ?>
+            <div class="container text-center fs-5">
+                <div class="mx-auto m-2">
+                    Prix total : <?= $total ?> €
+                </div>
+            
+
+
             <!----------------------------------------------Bouton qui vide le panier ---------------------------------------------------->
 
             <!-- je mets le bouton "vider panier" à l'interieur des {} du if = le bouton apparait seulement s'il y a au moins 1 article dans le panier-->
-
-            <form method="POST" action="./panier.php">
-                <button type="submit" name="clearCart" class="btn btn-dark">
-                    Vider panier
-                </button>
-            </form>
-
+            
+                <form method="POST" action="./panier.php">
+                    <button type="submit" name="clearCart" class="btn btn-dark m-2">
+                        Vider panier
+                    </button>
+                </form>
+         
             <!-------------------------------------------------Bouton qui valide le panier -------------------------------------------------->
-            <a href="./validation.php">
-                <button class="btn btn-success">
-                    Validation panier
-                </button>
-            </a>
 
+            
+                <a href="./validation.php">
+                    <button class="btn btn-success m-2">
+                        Validation panier
+                    </button>
+                </a>
+            </div>
         <?php
 
         } else {

@@ -18,64 +18,64 @@ include 'head.php';
     <?php
     include 'header.php';
     ?>
-
     <main>
-        <h1>Boutique</h1>
+
+        <div class="text-center" id=boutique>
+                <h1>Boutique des beaux-arts</h1>
+        </div>
         <div class="container-fluid">
-            
-            <div class="row">
-                <img src="./images/crayons.jpg" class = p-5 alt="tag">
-                    <?php
-                    // je déclare la variable qui contient mon tableau d'articles
-                    // sa valeur,c'est le tableau d'articles renvoyé par la fonction getArticles
-                    $articles = getArticles();
+            <!--<div class="row">
+                <img src="./images/crayons_couleur.jpg" class=p-2 alt="tag">
+            </div>-->
+            <div class="row list">
 
-                    // je teste cette variable pour vérifier que l'ai bien mes 3 articles
-                    //var_dump($articles);
+                <?php
+                // je déclare la variable qui contient mon tableau d'articles
+                // sa valeur,c'est le tableau d'articles renvoyé par la fonction getArticles
+                $articles = getArticles();
 
-                    //ou à la place des 2($articles = getArticles() + var_dump($articles)), je mets la fonction plus courte = var_dump(getArticles)
+                // je teste cette variable pour vérifier que l'ai bien mes 3 articles
+                //var_dump($articles);
 
-                    //je lance ma boucle pour afficher une card bootstrap par article
-                    foreach ($articles as $article) {
-                        echo "<div class=\"card col-md-4\">
-                                <img src=\"./images/" . $article['picture'] . "\" class=\"card-img-top\" alt=\"...\">
+                //ou à la place des 2($articles = getArticles() + var_dump($articles)), je mets la fonction plus courte = var_dump(getArticles)
+
+                //je lance ma boucle pour afficher une card bootstrap par article
+                foreach ($articles as $article) {
+                    echo "<div class=\"col-sm-4 p-5 h-75\">
+                                <div class=\"card text-center\">
+                                <img src=\"./images/" . $article['picture'] . "\" class=\"card-img-top mx-auto w-75\" alt=\"...\">
                                 <div class=\"card-body\">
                                     <h5 class=\"card-title\">" . $article['name'] . "</h5>
                                     <p class=\"card-text\">" . $article['description'] . "</p>
 
+                                    <div class=\"d-flex justify-content-around\">
                                     <form method=\"GET\" action=\"produit.php\">  
-
                                     <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
-                              
-                                    <input type=\"submit\" class=\"btn btn-outline-success\" value=\"Détails produits\">
-
+                                    <input type=\"submit\" class=\"btn btn-outline-warning\" value=\"Détails produits\">
                                     </form>
-
-        
-                                    <form method=\"GET\" action=\"panier.php\">  
-
-                                    <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
-
-                                    <input type=\"submit\" class=\"btn btn-warning\" value=\"Ajout panier\">
                                     
+                                    <form method=\"GET\" action=\"panier.php\">  
+                                    <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
+                                    <input type=\"submit\" class=\"btn btn-success\" value=\"Ajout panier\">
                                     </form>
-
+                                    </div>
                                 </div>  
+                                </div>
                             </div>";
-                    }
-                    // Pour faire fonctionner le Foreach, je mets des "" (echo "... et ...</div>";) ainsi qu'un \ avant chaque " .
+                }
+                // Pour faire fonctionner le Foreach, je mets des "" (echo "... et ...</div>";) ainsi qu'un \ avant chaque " .
 
 
 
 
-                    if (isset($_POST['commandeValidee'])) {
-                        // je déclenche la fonction de vider le panier
-                        clearCart();
-                    }
+                if (isset($_POST['commandeValidee'])) {
+                    // je déclenche la fonction de vider le panier
+                    clearCart();
+                }
 
 
-                    ?>
-               
+                ?>
+
             </div>
         </div>
     </main>

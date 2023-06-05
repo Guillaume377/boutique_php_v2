@@ -19,7 +19,7 @@ include 'head.php';
     ?>
 
     <main>
-    <h1>Produit</h1>
+
         <?php
         // 1) je vais récupérer l'id transmis par le formulaire en GET
         $productId = $_GET['productId'];
@@ -28,36 +28,33 @@ include 'head.php';
         //2) je vais récupérer le produit qui correspond à cet id
         $article = getArticleFromId($productId);
         //var_dump($article); // je teste ma variable
-        
+
         // 3) afficher ses infos
         ?>
 
-        <div class="card mb-3">
-            <img src="./images/<?= $article['picture']?>" class="card-img-top w-50 mx-auto" alt="...">
-            <div class="card-body">
-                <h5 class="card-title"><?= $article['name']?></h5>
-                <h5 class="card-title"><?= $article['price']?> €</h5>
-                <p class="card-text"><?= $article['description']?></p>
-                <p class="card-text"><small class="text-body-secondary"><?=$article['detailedDescription']?></small></p>
-            </div>
+        <div class="text-center">
+            <h1><?= $article['name'] ?></h1>
         </div>
 
-        <form method="GET" action="panier.php">  
+        <div class="card mb-3">
+            <img src="./images/<?= $article['picture'] ?>" class="card-img-top mx-auto" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><?= $article['name'] ?></h5>
+                <h5 class="card-title"><?= $article['price'] ?> €</h5>
+                <p class="card-text"><?= $article['description'] ?></p>
+                <p class="card-text"><small class="text-body-secondary"><?= $article['detailedDescription'] ?></small></p>
+            </div>
+            <form method="GET" action="panier.php">
+                <input type="hidden" name="productId" value=<?= $article['id'] ?>>
+                <input type="submit" class="btn btn-success" value="Ajout panier">
+            </form>
+        </div>
 
-            <input type="hidden" name="productId" value=<?=$article['id']?>>
 
-            <input type="submit" class="btn btn-warning" value="Ajout panier">
-                                    
-        </form>
 
-        
+
     </main>
 
     <?php
     include 'footer.php';
     ?>
-
-
-
-
-

@@ -49,21 +49,34 @@ include 'head.php';
                 </div>";
             }
             $total = calculerPrixTotal($_SESSION['panier']);
-            echo "Prix total : " . $total . " €";
+
 
             $totalFraisPort = CalculerFraisPort($_SESSION['panier']);
-            echo "Montant total frais de port : " . $totalFraisPort . " €";
+
 
             $totalorder = $total + $totalFraisPort;
-            echo "Total de la commande : " . $totalorder . " €";
         }
 
         ?>
 
-        <!-- Button trigger modal -->
-        <button type="submit" name ="clearCart" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Valider la commande
-        </button>
+        <div class="container fs-5">
+            <div class="d-flex flex-column m-2">
+                Prix total : <?= $total ?> €
+            </div>
+            <div class="d-flex flex-column m-2">
+                Montant total frais de port : <?= $totalFraisPort ?> €
+            </div>
+            <div class="d-flex flex-column m-2">
+                Total de la commande : <?= $totalorder ?> €
+            </div>
+
+
+            <!-- Button trigger modal -->
+            <button type="submit" name="clearCart" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Valider la commande
+            </button>
+        </div>
+
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -81,19 +94,14 @@ include 'head.php';
                     </div>
                     <div class="modal-footer">
                         <form method="POST" action="./index.php">
-                                <button type="submit" name="commandeValidee" class="btn btn-dark">
-                                    Retour à l'accueil
-                                </button>
+                            <button type="submit" name="commandeValidee" class="btn btn-dark">
+                                Retour à l'accueil
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
 
     </main>
 
