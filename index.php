@@ -46,17 +46,17 @@ include 'head.php';
                                 <img src=\"./images/" . $article['picture'] . "\" class=\"card-img-top mx-auto w-75\" alt=\"...\">
                                 <div class=\"card-body\">
                                     <h5 class=\"card-title\">" . $article['name'] . "</h5>
-                                    <p class=\"card-text\">" . $article['description'] . "</p>
+                                    <p class=\"description-index card-text\">" . $article['description'] . "</p>
 
                                     <div class=\"d-flex justify-content-around\">
                                     <form method=\"GET\" action=\"produit.php\">  
                                     <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
-                                    <input type=\"submit\" class=\"btn btn-outline-warning\" value=\"Détails produits\">
+                                    <input type=\"submit\" class=\"btn btn-ghost-1\" value=\"Détails produits\">
                                     </form>
                                     
                                     <form method=\"GET\" action=\"panier.php\">  
                                     <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
-                                    <input type=\"submit\" class=\"btn btn-success\" value=\"Ajout panier\">
+                                    <input type=\"submit\" class=\"btn btn-ghost-2\" value=\"Ajout panier\">
                                     </form>
                                     </div>
                                 </div>  

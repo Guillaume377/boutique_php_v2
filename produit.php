@@ -46,7 +46,7 @@ include 'head.php';
             </div>
             <form method="GET" action="panier.php">
                 <input type="hidden" name="productId" value=<?= $article['id'] ?>>
-                <input type="submit" class="btn btn-success" value="Ajout panier">
+                <input type="submit" class="btn btn-ghost-2" value="Ajout panier">
             </form>
         </div>
 

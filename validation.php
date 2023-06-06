@@ -59,7 +59,7 @@ include 'head.php';
 
         ?>
 
-        <div class="container fs-5">
+        <div class="container text-center fs-5">
             <div class="d-flex flex-column m-2">
                 Prix total : <?= $total ?> €
             </div>
@@ -67,12 +67,12 @@ include 'head.php';
                 Montant total frais de port : <?= $totalFraisPort ?> €
             </div>
             <div class="d-flex flex-column m-2">
-                Total de la commande : <?= $totalorder ?> €
+                <span class= "total">Total de la commande : <?= $totalorder ?> €</span>
             </div>
 
 
             <!-- Button trigger modal -->
-            <button type="submit" name="clearCart" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="submit" name="clearCart" class="btn btn-ghost-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Valider la commande
             </button>
         </div>

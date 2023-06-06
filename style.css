@@ -36,13 +36,40 @@
 =================================== */
 h1 {
     font-family: 'Satisfy', cursive;
-    font-size: 600%;
-    color: black;
+    font-size: 550%;
+    color:brown;
     margin: 15% 0% 5% 0%;
     display: flex;
     justify-content: center;
 }
 
+.btn-ghost-1{
+    background-color: darkgoldenrod;
+    color: white;
+    }
+    
+    .btn-ghost-1:hover{
+        background-color: white;
+        border: 1px solid darkgoldenrod;
+        box-shadow: 7px 3px 3px darkgoldenrod;
+        color: darkgoldenrod;
+    }
+    
+    .btn-ghost-2 {
+        background-color: brown;
+        color: white;
+    }
+    
+    .btn-ghost-2:hover{
+        background-color: white;
+        border: 1px solid brown;
+        box-shadow: 7px 3px 3px brown;
+        color: brown;
+    }
+    
+
+/* HEADER
+=================================== */
 nav {
     background-color: darkgoldenrod;
 }
@@ -61,6 +88,8 @@ nav {
     width: 15%;
 }
 
+/* INDEX
+=================================== */
 #boutique {
     background-image: url(./images/crayons_couleur.jpg);
     background-size: 100%;
@@ -69,7 +98,7 @@ nav {
 
 #boutique h1 {
     color: white;
-    padding-bottom: 20%;
+    padding-bottom: 17%;
     padding-top: 5%;
     margin-top: 11%;
     margin-bottom: 0%;
@@ -78,6 +107,11 @@ nav {
 
 .card h5 {
     color: darkgoldenrod;
+    font-size: large;
+}
+
+.description-index {
+    font-size: xx-small;
 }
 
 .card-img-top {
@@ -92,6 +126,21 @@ nav {
     text-decoration: none;
    
 }
+
+/* PANIER
+=================================== */
+
+.total {
+    color:brown;
+    text-transform: uppercase;
+    font-weight: 500;
+    border: 2px solid brown;
+    border-radius: 5px;
+    padding: 1%;
+}
+
+/* FOOTER
+=================================== */
 
 footer {
     padding-top: 4%;

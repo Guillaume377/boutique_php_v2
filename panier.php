@@ -82,7 +82,7 @@ include 'head.php';
                         <input type=\"hidden\" name=\"modifiedArticleId\" value=\"" . $article['id'] . "\">
                         <input class=\"col-3 offset-2\" type=\"number\" id=\"numberInput\" min=\"1\" max=\"10\" step=\"1\" name=\"newQuantity\" 
                         value=\"" . $article['quantite'] . "\">
-                        <button type=\"submit\" class=\" clo-5 offset-2 btn btn-btn-light\">
+                        <button type=\"submit\" class=\" col-4 offset-1 btn btn-ghost-1\">
                             Modifier quantité
                         </button>
                         </div>    
@@ -90,7 +90,7 @@ include 'head.php';
 
                     <form class=\"col-lg-2\" action=\"panier.php\" method=\"post\">
                         <input type=\"hidden\" name=\"deletedArticleId\" value=\"" . $article['id'] . "\">
-                        <button type=\"submit\" class=\"btn btn-danger mt-2 mt-lg-0\">
+                        <button type=\"submit\" class=\"btn btn-ghost-2 mt-2 mt-lg-0\">
                             Supprimer
                         </button>
                     </form>    
@@ -101,9 +101,9 @@ include 'head.php';
             $total = calculerPrixTotal($_SESSION['panier']);
 
         ?>
-            <div class="container text-center fs-5">
+            <div class="container text-center fs-5 p-5">
                 <div class="mx-auto m-2">
-                    Prix total : <?= $total ?> €
+                    <span class= "total">Prix total : <?= $total ?> €</span>
                 </div>
             
 
@@ -113,7 +113,7 @@ include 'head.php';
             <!-- je mets le bouton "vider panier" à l'interieur des {} du if = le bouton apparait seulement s'il y a au moins 1 article dans le panier-->
             
                 <form method="POST" action="./panier.php">
-                    <button type="submit" name="clearCart" class="btn btn-dark m-2">
+                    <button type="submit" name="clearCart" class="btn btn-ghost-1 m-2">
                         Vider panier
                     </button>
                 </form>
@@ -122,7 +122,7 @@ include 'head.php';
 
             
                 <a href="./validation.php">
-                    <button class="btn btn-success m-2">
+                    <button class="btn btn-ghost-2 m-2">
                         Validation panier
                     </button>
                 </a>
@@ -130,8 +130,9 @@ include 'head.php';
         <?php
 
         } else {
-
-            echo "<p>Votre panier est vide.</p>";
+            echo "<div class=\"text-center\">
+                     <p>Votre panier est vide.</p>
+                    </div>";
         }
 
         ?>

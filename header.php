@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item me-auto">
-          <a class="nav-link active" aria-current="page" href="./panier.php"><i class="fa-solid fa-cart-shopping" style="color: #198754;"></i></a>
+          <a class="nav-link active" aria-current="page" href="./panier.php"><i class="fa-solid fa-cart-shopping" style="color:brown"></i></a>
         </li>
     </div>
   </div>
