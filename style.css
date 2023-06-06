@@ -6,69 +6,69 @@
 
 /* COLORS
     -default body text 
-    -h1               
-    -h2               
-    -h3
+    -h1                 brown
+    -h5                 darkgoldenrod
 
-    -button
-    -button:hover
+    -button             darkgoldenrod
+                        brown
+    -button:hover       white
 
-    -icon               #b8860b
-                        #198754
-
-    -border
+    -icon               brown
+                    
+    -border             brown
 */
 
 /* FONTS
-    -Default        
-    -Subtitle
+    -Default            font-family: 'Satisfy', cursive;
 
 */
 
 /* CSS DIRECTORY
     1. =GLOBAL
     2. =HEADER
-    3. =PRODUITS
+    3. =INDEX
+    4. =PANIER et VALIDATION
+    5. =FOOTER
 
 */
 
-/* GLOBAL
+/* 1. GLOBAL
 =================================== */
 h1 {
     font-family: 'Satisfy', cursive;
     font-size: 550%;
-    color:brown;
+    color: brown;
     margin: 15% 0% 5% 0%;
     display: flex;
     justify-content: center;
 }
 
-.btn-ghost-1{
+.btn-ghost-1 {
     background-color: darkgoldenrod;
     color: white;
-    }
-    
-    .btn-ghost-1:hover{
-        background-color: white;
-        border: 1px solid darkgoldenrod;
-        box-shadow: 7px 3px 3px darkgoldenrod;
-        color: darkgoldenrod;
-    }
-    
-    .btn-ghost-2 {
-        background-color: brown;
-        color: white;
-    }
-    
-    .btn-ghost-2:hover{
-        background-color: white;
-        border: 1px solid brown;
-        box-shadow: 7px 3px 3px brown;
-        color: brown;
-    }
-    
+}
 
-/* HEADER
+.btn-ghost-1:hover {
+    background-color: white;
+    border: 1px solid darkgoldenrod;
+    box-shadow: 7px 3px 3px darkgoldenrod;
+    color: darkgoldenrod;
+}
+
+.btn-ghost-2 {
+    background-color: brown;
+    color: white;
+}
+
+.btn-ghost-2:hover {
+    background-color: white;
+    border: 1px solid brown;
+    box-shadow: 7px 3px 3px brown;
+    color: brown;
+}
+
+
+/* 2. HEADER
 =================================== */
 nav {
     background-color: darkgoldenrod;
@@ -88,7 +88,7 @@ nav {
     width: 15%;
 }
 
-/* INDEX
+/* 3. INDEX
 =================================== */
 #boutique {
     background-image: url(./images/crayons_couleur.jpg);
@@ -100,7 +100,7 @@ nav {
     color: white;
     padding-bottom: 17%;
     padding-top: 5%;
-    margin-top: 11%;
+    margin-top: 7%;
     margin-bottom: 0%;
     font-size: 600%;
 }
@@ -111,7 +111,7 @@ nav {
 }
 
 .description-index {
-    font-size: xx-small;
+    font-size: small;
 }
 
 .card-img-top {
@@ -124,14 +124,14 @@ nav {
 
 .bouton {
     text-decoration: none;
-   
+
 }
 
-/* PANIER
+/* 4. PANIER et VALIDATION
 =================================== */
 
 .total {
-    color:brown;
+    color: brown;
     text-transform: uppercase;
     font-weight: 500;
     border: 2px solid brown;
@@ -139,9 +139,10 @@ nav {
     padding: 1%;
 }
 
-/* FOOTER
+/* 5. FOOTER
 =================================== */
 
 footer {
+    color: brown;
     padding-top: 4%;
 }

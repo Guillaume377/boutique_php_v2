@@ -34,7 +34,7 @@ function getArticles()
             'name' => 'Coffret en bois de 120 crayons supracolor soft',
             'id' => '3',
             'price' => 495.99,
-            'description' => 'L´ensemble de la gamme de couleurs Supracolor dans dans un coffret en bois de couleur acajou.',
+            'description' => 'L´ensemble de la gamme Supracolor dans un coffret en bois de couleur acajou.',
             'detailedDescription' => 'Coffret en bois de 120 crayons supracolor soft : Dimensions du coffret: 24,5 x 39,5 x 6 cm. Une parfaite idée de cadeau.
                          Les crayons aquarellables Supracolor Soft ont une mine tendre de 3,8 mm de diamétre, mine très résistante mais aussi économique grâce à son opacité remarquable. 
                          Destinées aux œuvres de grande ampleur, les mines sont extrêmement solides.

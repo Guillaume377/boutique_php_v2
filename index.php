@@ -24,9 +24,7 @@ include 'head.php';
                 <h1>Boutique des beaux-arts</h1>
         </div>
         <div class="container-fluid">
-            <!--<div class="row">
-                <img src="./images/crayons_couleur.jpg" class=p-2 alt="tag">
-            </div>-->
+           
             <div class="row list">
 
                 <?php
