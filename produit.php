@@ -33,16 +33,16 @@ include 'head.php';
         ?>
 
         <div class="text-center">
-            <h1><?= $article['name'] ?></h1>
+            <h1><?= $article['nom'] ?></h1>
         </div>
 
         <div class="card mb-3">
-            <img src="./images/<?= $article['picture'] ?>" class="card-img-top mx-auto" alt="...">
+            <img src="./images/<?= $article['image'] ?>" class="card-img-top mx-auto" alt="...">
             <div class="card-body">
-                <h5 class="card-title"><?= $article['name'] ?></h5>
-                <h5 class="card-title"><?= $article['price'] ?> €</h5>
+                <h5 class="card-title"><?= $article['nom'] ?></h5>
+                <h5 class="card-title"><?= $article['prix'] ?> €</h5>
                 <p class="card-text"><?= $article['description'] ?></p>
-                <p class="card-text"><small class="text-body-secondary"><?= $article['detailedDescription'] ?></small></p>
+                <p class="card-text"><small class="text-body-secondary"><?= $article['description_detaillee'] ?></small></p>
             </div>
             <form method="GET" action="panier.php">
                 <input type="hidden" name="productId" value=<?= $article['id'] ?>>

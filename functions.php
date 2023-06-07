@@ -1,67 +1,88 @@
 <?php
 
-// ******************************** renvoyer un tableau d'articles ************************************** */
+// ******************************** connexion à la base de données ************************************** */
+
+function getConnection()
+{
+    // try : je tente une connexion
+    try{
+        $db = new PDO(
+            'mysql:host=localhost;dbname=boutique_en_ligne;charset=utf8', // infos : sgbd, nom base, adresse (host) +
+            'root', // pseudo utilisateur (root en local)
+            '', // mot de passe (aucun en local)
+            array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC)
+        ); // options PDO : 1) affichage des erreurs / 2) récupération des données simplifiée
+
+        // si ça ne marche pas : je mets fin au code php en affichant l'erreur
+    } catch (Exception $erreur) { // je récupère l'erreur en paramètre
+        die('Erreur : ' . $erreur->getMessage()); //je l'affiche et je mets fin au script
+    }
+
+    // je retourne la connexion stockée dans une variable
+    return $db;
+}
+
+
+
+
+
+// ******************************** récupérer la liste des articles ************************************** */
 
 function getArticles()
 {
-    return [
-        //***************************** article 1***************************** */
-        [
-            'name' => 'Coffret Atelier Albrecht Dürer',
-            'id' => '1',
-            'price' => 89.99,
-            'description' => 'Un coffret de 36 crayons très facile à emporter',
-            'detailedDescription' => 'Coffret Atelier Albrecht Dürer, 36 crayons Albrecht Dürer et 1 pinceau aquarelle haut de gamme 
-                            dans un superbe coffret en imitation cuir à fermeture magnétique.
-                            Très facile à emporter lors de vos voyages et magnifique écrin pour votre atelier.',
-            'picture' => 'coffret_dürer.jpg'
-        ],
+    // je me connecte à la base de données
+    $db = getConnection();
 
-        //*****************************article 2****************************** */
+    // j'exécute une requête qui va récupérer tous les articles
+    $results = $db->query('SELECT * FROM articles');
 
-        [
-            'name' => 'Coffret de crayons en bois Lightfast',
-            'id' => '2',
-            'price' => 349.99,
-            'description' => 'La gamme Lightfast dans un superbe coffret en bois.',
-            'detailedDescription' => 'Tous les plaisirs et les exceptionnelles qualités de la gamme Lightfast. 
-                            Un superbe coffret en bois contenant 100 crayons de bois aux couleurs uniques.',
-            'picture' => 'coffret_lightfast.jpg'
-        ],
-
-        //*****************************article 3****************************** */
-        [
-            'name' => 'Coffret en bois de 120 crayons supracolor soft',
-            'id' => '3',
-            'price' => 495.99,
-            'description' => 'L´ensemble de la gamme Supracolor dans un coffret en bois de couleur acajou.',
-            'detailedDescription' => 'Coffret en bois de 120 crayons supracolor soft : Dimensions du coffret: 24,5 x 39,5 x 6 cm. Une parfaite idée de cadeau.
-                         Les crayons aquarellables Supracolor Soft ont une mine tendre de 3,8 mm de diamétre, mine très résistante mais aussi économique grâce à son opacité remarquable. 
-                         Destinées aux œuvres de grande ampleur, les mines sont extrêmement solides.
-                         La gamme de crayons aquarellables Supracolor Soft propose une grande variété d’applications grâce à la luminosité des teintes et à leur excellent pouvoir couvrant.
-                         Le dessin au crayon peut ainsi être délavé, estompé au doigt, texturé au frottement de la mine sur un papier abrasif ou pleinement aquarellé.',
-            'picture' => 'coffret_supracolor.jpg'
-        ],
-
-    ];
+    // je récupère les résultats et je les renvoie grâce à return
+    return $results->fetchAll();
 }
 
-// ****************************************** récupérer le produit  qui correspond à l'id fourni en paramètre ***********************
+
+
+
+// ******************************* récupérer les gammes et leurs articles ************************************ */
+
+function getGammes()
+{
+    $db = getConnection();
+
+    $results = $db->query('SELECT * FROM gammes');
+
+    return $results->fetchAll();
+}
+
+
+function getArticlesByGamme ($id)
+{
+    $db = getConnection();
+
+    $results = $db->query
+    
+
+
+
+}
+
+// ********************************************* récupérer un article à partir de son id **********************
 
 function getArticleFromId($id)
-{   //$id : je peux choisir le nom que je souhaite
+{ 
+    // je me connecte à la bdd
+     $db = getConnection();
 
-    //récupérer la liste des articles
-    $articles = getArticles();
+    // /!\ JAMAIS DE VARIABLE PHP DIRECTEMENT DANS UNE REQUETE /!\ (risque d'injection SQL)
 
-    // aller chercher dedans l'article qui comporte l'id en paramètre
-    foreach ($articles as $article) {
-        if ($article['id'] == $id) {
+    // je prépare ma requête
+    $query = $db->prepare('SELECT * FROM Articles WHERE id = ?');
 
-            // le renvoyer avec un return
-            return $article;
-        }
-    }
+    // je l'exécute avec le bon paramètre
+    $query->execute([$id]); 
+
+    // retourne l'article sous forme de tableau associatif
+    return $query->fetch(); 
 }
 // ******************************************* initialiser le panier **************************************************
 
