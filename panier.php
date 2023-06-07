@@ -127,6 +127,7 @@ include 'head.php';
                     </button>
                 </a>
             </div>
+            
         <?php
 
         } else {

@@ -14,5 +14,7 @@
           <a class="nav-link active" style = "color:brown" aria-current="page" href="./panier.php"><i class="fa-solid fa-cart-shopping" style="color:brown"></i><?= count($_SESSION['panier']) ?></a>
         </li>
     </div>
+    <a class="navbar-brand" href="./gammes.php">Gammes</a>
+    <a class="navbar-brand" href="./connexion.php">Inscription</a>
   </div>
 </nav>

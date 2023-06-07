@@ -98,11 +98,14 @@ include 'head.php';
                         <p>Livraison estimée le
                             <?php
                             // ********************* calcul : date du jour + 3 jours *****************
+
                             // je récupère la date du jour en format DateTime (exigé par la fonction date_add)
                             $date = new DateTime("now");
+
                             // on utilise date_add pour ajouter 3 jours
                             // date_interval... => permet d'obtenir l'intervalle de temps souhaité pour l'ajouter
                             date_add($date, date_interval_create_from_date_string("3 days"));
+                            
                             // à ce stade, $date est directement modifiée
                             // je l'affiche en la formatant : jour mois année => 09-06-2023
                             echo date_format($date, "d-m-Y");

@@ -40,9 +40,6 @@ function getArticles()
     return $results->fetchAll();
 }
 
-
-
-
 // ******************************* récupérer les gammes et leurs articles ************************************ */
 
 function getGammes()
@@ -55,16 +52,28 @@ function getGammes()
 }
 
 
-function getArticlesByGamme ($id)
+function getArticlesByGamme ($id_gamme)
 {
+    // je me connecte à la bdd
     $db = getConnection();
 
-    $results = $db->query
+    // je prépare ma requête
+    $query = $db->prepare('SELECT * FROM articles WHERE id_gamme = ?');
+
+    // je l'exécute avec le bon paramètre
+    $query->execute([$id_gamme]); 
+
+    // retourne l'article sous forme de tableau associatif
+    return $query->fetch(); 
     
-
-
-
 }
+
+
+
+
+function showArticles($getArticlesByGamme){}
+
+
 
 // ********************************************* récupérer un article à partir de son id **********************
 
