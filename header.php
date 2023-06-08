@@ -15,6 +15,6 @@
         </li>
     </div>
     <a class="navbar-brand" href="./gammes.php">Gammes</a>
-    <a class="navbar-brand" href="./connexion.php">Inscription</a>
+    <a class="navbar-brand" href="./inscription.php">Inscription</a>
   </div>
 </nav>

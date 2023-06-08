@@ -44,29 +44,35 @@ function getArticles()
 
 function getGammes()
 {
+    // je me connecte à la base de données
     $db = getConnection();
 
+    // j'exécute une requête qui va récupérer toutes les gammes
     $results = $db->query('SELECT * FROM gammes');
 
+    // je récupère les résultats et je les renvoie grâce à return
     return $results->fetchAll();
 }
 
 
-function getArticlesByGamme ($id_gamme)
+function getArticlesByGamme ($id)
 {
     // je me connecte à la bdd
     $db = getConnection();
+
+     // /!\ JAMAIS DE VARIABLE PHP DIRECTEMENT DANS UNE REQUETE /!\ (risque d'injection SQL)
 
     // je prépare ma requête
     $query = $db->prepare('SELECT * FROM articles WHERE id_gamme = ?');
 
     // je l'exécute avec le bon paramètre
-    $query->execute([$id_gamme]); 
+    $query->execute([$id]); 
 
     // retourne l'article sous forme de tableau associatif
-    return $query->fetch(); 
+    return $query->fetchAll(); 
     
 }
+
 
 
 
