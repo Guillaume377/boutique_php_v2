@@ -18,84 +18,119 @@ include 'head.php';
     ?>
 
     <main>
-        <h1>Inscription</h1>
+        <div class="boutique">
+            <h1>Mon compte</h1>
+        </div>
+        <!-- ****************************** Connexion ******************************** -->
 
         <div class="container">
             <div class="row">
-                <div class="col">
-                    <form method="POST" action="connexion.php">
-                        <div class="container ">
-                            <div class="row">
-                                <div class="col d-flex flex-column">
-                                    <h2>Connexion</h2>
-                                    <label for="email">Email :</label>
-                                    <input type="email" name="email" id="email" placeholder="Ajouter votre email" required><br><br>
+                <div class="col-md-4 connexion">
 
-                                    <label for="motdepasse">Mot de passe :</label>
-                                    <input type="password" name="motdepasse" id="motdepasse" required><br><br>
-                                </div>
-                            </div>
+                    <div class="text-center my-3">
+                        <h2>Connexion</h2>
+                    </div>
+
+                    <form method="POST" action="connexion.php">
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email :</label>
+                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ajouter votre email" required>
                         </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Mot de passe :</label>
+                            <input type="password" name="motdepasse" class="form-control" id="exampleInputPassword1">
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Se souvenir de moi</label>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-5">
+                        <a href="./connexion.php"><button type="submit" class="btn btn-ghost-1">Se connecter</button>
+                        </a>
+                    </div>
+
                     </form>
                 </div>
 
-                <div class="col">
+                <!-- ****************************** Inscription ******************************** -->
+
+                <div class="col-md-6 offset-2 connexion">
+                    <div class="text-center my-3">
+                        <h2>Inscription</h2>
+                    </div>
+
                     <form method="POST" action="connexion.php">
-                        <div class=row>
-                            <div class="col">
-                                <h2>Inscription</h2>
-                                <div class=row>
-                                    <div class="col d-flex flex-column">
-                                        <label for="nom">Nom :</label>
-                                        <input type="text" name="nom" id="nom" required><br><br>
-                                    </div>
 
-                                    <div class="col d-flex flex-column">
-                                        <label for="prenom">Prénom :</label>
-                                        <input type="text" name="prenom" id="prenom" required><br><br>
-                                    </div>
+                        <!-- ****************************** champ "nom" + "prénom" ****************************** -->
+
+                        <div class="row">
+                            <div class="d-flex justify-content-between">
+                                <div class="mb-3 w-50">
+                                    <label for="nom" class="form-label">Nom :</label>
+                                    <input type="text" name="nom" class="form-control" placeholder="exemple : LEBLANC" required>
                                 </div>
 
-                                <div class=row>
-                                    <div class="col d-flex flex-column">
-                                        <label for="email">Email :</label>
-                                        <input type="email" name="email" id="email" placeholder="Ajouter votre email" required><br><br>
-                                    </div>
-
-                                    <div class="col d-flex flex-column">
-                                        <label for="motdepasse">Mot de passe :</label>
-                                        <input type="password" name="motdepasse" id="motdepasse" required><br><br>
-                                    </div>
+                                <div class="mb-3 w-50 ps-3">
+                                    <label for="prenom" class="form-label">Prénom :</label>
+                                    <input type="text" name="prenom" class="form-control" placeholder="exemple : Juste" required>
                                 </div>
-
-                                <div class="col d-flex flex-column">
-                                    <label for="adresse">Adresse :</label>
-                                    <textarea name="adresse" id="adresse" rows="3" required></textarea><br><br>
-                                </div>
-
-                                <div class=row>
-                                    <div class="col d-flex flex-column">
-                                        <label for="codepostal">Code postal :</label>
-                                        <input type="text" name="codepostal" id="codepostal" required><br><br>
-                                    </div>
-
-                                    <div class="col d-flex flex-column">
-                                        <label for="ville">Ville :</label>
-                                        <input type="text" name="ville" id="ville" required><br><br>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-end">
-                                    <input type="submit" value="S'inscrire">
-                                </div>
-
                             </div>
                         </div>
+
+                        <!-- ****************************** champ "email" + "mot_de_passe" ***************** -->
+
+                        <div class="row">
+                            <div class="d-flex justify-content-between">
+                                <div class="mb-3 w-50">
+                                    <label for="email" class="form-label">Email :</label>
+                                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ajouter votre email" required>
+                                </div>
+
+                                <div class="mb-3 w-50 ps-3">
+                                    <label for="mot_de_passe" class="form-label">Mot de passe :</label>
+                                    <input type="password" name="mot_de_passe" class="form-control" id="exampleInputPassword1" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ****************************** champ "adresse" ******************************** -->
+
+                        <div class="mb-3">
+                            <label for="adresse" class="form-label">Adresse :</label>
+                            <input type="text" name="adresse" class="form-control" placeholder="exemple : 7 rue de la Tour Eiffel en allumettes" required>
+                        </div>
+
+                        <!-- ****************************** champ "code_postal" + "ville" ********************** -->
+
+                        <div class="row">
+                            <div class="d-flex justify-content-between">
+                                <div class="mb-3 w-50">
+                                    <label for="code_postal" class="form-label">Code postal :</label>
+                                    <input type="text" name="code_postal" class="form-control" placeholder="exemple : 45200" required>
+                                </div>
+
+                                <div class="mb-3 w-50 ps-3">
+                                    <label for="ville" class="form-label">Ville :</label>
+                                    <input type="text" name="ville" class="form-control" placeholder="exemple : MONTARGIS" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ****************************** bouton "s'inscrire" ******************************** -->
+
+                        <div class="d-flex justify-content-center mb-2">
+                            <button type="submit" class="btn btn-ghost-1 ">S'inscrire</button>
+                        </div>
+
                     </form>
                 </div>
             </div>
         </div>
-    </main>
 
-    <?php
-    include 'footer.php';
-    ?>
+        <?php
+        include 'footer.php';
+        ?>

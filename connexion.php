@@ -17,32 +17,20 @@ include 'head.php';
     include 'header.php';
     ?>
 
-<?php 
+    <?php
 
-    if (isset($_POST['inscription'])) {
-
-}
-
-?>
+    if (isset($_POST['nom'])) {
+    }
 
 
-<?php
-    include 'footer.php';
+    //var_dump($_POST);
+    //var_dump(checkInputsLenght())
+
+    
+
     ?>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <?php
+    include 'footer.php';
+    ?>

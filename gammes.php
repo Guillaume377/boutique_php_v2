@@ -17,14 +17,19 @@ include 'head.php';
     include 'header.php';
     ?>
 
-<?php
 
+<div class="boutique">
+    <h1>Gammes</h1>
+</div>
+    
+<?php
+    
 $gammes = getGammes();
 
 foreach ($gammes as $gamme) {
     echo "<div class= container\">
     <div class=\"card text-center\">
-            <h5 class=\"card-title\">" . $gamme['nom'] . "</h5>
+            <h2 class=\"card-title\">" . $gamme['nom'] . "</h2>
     </div> 
 </div>
 

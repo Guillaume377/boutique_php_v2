@@ -43,6 +43,17 @@ h1 {
     justify-content: center;
 }
 
+h2.card-title {
+    font-family: 'Satisfy', cursive;
+    font-size: 250%;
+    color:white;
+    background-color: brown;
+    display: flex;
+    justify-content: center;
+    margin: 1% 0%;
+    
+}
+
 .btn-ghost-1 {
     background-color: darkgoldenrod;
     color: white;
@@ -57,14 +68,29 @@ h1 {
 
 .btn-ghost-2 {
     background-color: brown;
-    color: white;
+    color: white !important;
 }
 
 .btn-ghost-2:hover {
     background-color: white;
     border: 1px solid brown;
     box-shadow: 7px 3px 3px brown;
-    color: brown;
+    color: brown !important;
+}
+
+.boutique {
+    background-image: url(./images/crayons_couleur.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.boutique h1 {
+    color: white;
+    padding-bottom: 17%;
+    padding-top: 5%;
+    margin-top: 7%;
+    margin-bottom: 0%;
+    font-size: 600%;
 }
 
 
@@ -80,30 +106,22 @@ nav {
 
 .navbar-brand {
     font-family: 'Satisfy', cursive;
-    font-size: 300%;
+    font-size: 200%;
     color: brown;
 }
 
-.navbar-brand img {
-    width: 15%;
+.navbar-brand:hover {
+    color: white;
 }
+
+.navbar-brand img {
+    width: 25%;
+    border-radius:25px;
+}
+
 
 /* 3. INDEX
 =================================== */
-#boutique {
-    background-image: url(./images/crayons_couleur.jpg);
-    background-size: 100%;
-    background-repeat: no-repeat;
-}
-
-#boutique h1 {
-    color: white;
-    padding-bottom: 17%;
-    padding-top: 5%;
-    margin-top: 7%;
-    margin-bottom: 0%;
-    font-size: 600%;
-}
 
 .card h5 {
     color: darkgoldenrod;
@@ -139,7 +157,19 @@ nav {
     padding: 1%;
 }
 
-/* 5. FOOTER
+/* 5. INSCRIPTION
+=================================== */
+
+.connexion {
+    background-color: white;
+    border: 1px solid brown;
+    border-radius: 25px;
+    box-shadow: 7px 3px 3px brown;
+    color: brown !important;
+    margin-top: 5%;
+}
+
+/* FOOTER
 =================================== */
 
 footer {

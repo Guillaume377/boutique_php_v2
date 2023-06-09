@@ -20,7 +20,7 @@ include 'head.php';
     ?>
     <main>
 
-        <div class="text-center" id=boutique>
+        <div class="boutique">
                 <h1>Boutique des beaux-arts</h1>
         </div>
         <div class="container-fluid">
@@ -63,15 +63,10 @@ include 'head.php';
                 }
                 // Pour faire fonctionner le Foreach, je mets des "" (echo "... et ...</div>";) ainsi qu'un \ avant chaque " .
 
-
-
-
                 if (isset($_POST['commandeValidee'])) {
                     // je déclenche la fonction de vider le panier
                     clearCart();
                 }
-
-
                 ?>
 
             </div>
