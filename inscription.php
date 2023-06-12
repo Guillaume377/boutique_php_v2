@@ -25,7 +25,7 @@ include 'head.php';
 
         <div class="container">
             <div class="row">
-                <div class="col-md-4 connexion">
+                <div class="col-md-5 connexion">
 
                     <div class="text-center my-3">
                         <h2>Connexion</h2>
@@ -58,7 +58,7 @@ include 'head.php';
 
                 <!-- ****************************** Inscription ******************************** -->
 
-                <div class="col-md-6 offset-2 connexion">
+                <div class="col-md-5 connexion">
                     <div class="text-center my-3">
                         <h2>Inscription</h2>
                     </div>

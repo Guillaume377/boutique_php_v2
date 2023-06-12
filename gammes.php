@@ -42,14 +42,14 @@ foreach ($gammes as $gamme) {
     $articles = getArticlesByGamme($gamme['id']);
 
     foreach ($articles as $article) {
-        echo "<div class=\"col-sm-4 p-5 h-75\">
+        echo "<div class=\"produit col-sm-4 p-5 h-75\">
                     <div class=\"card text-center\">
                     <img src=\"./images/" . $article['image'] . "\" class=\"card-img-top mx-auto w-75\" alt=\"...\">
                     <div class=\"card-body\">
                         <h5 class=\"card-title\">" . $article['nom'] . "</h5>
                         <p class=\"description-index card-text\">" . $article['description'] . "</p>
 
-                        <div class=\"d-flex justify-content-around\">
+                        <div class=\"button-card d-flex justify-content-around\">
                         <form method=\"GET\" action=\"produit.php\">  
                         <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
                         <input type=\"submit\" class=\"btn btn-ghost-1\" value=\"Détails produits\">

@@ -32,7 +32,7 @@ include 'head.php';
         // 3) afficher ses infos
         ?>
 
-        <div class="text-center">
+        <div class="titre-article text-center">
             <h1><?= $article['nom'] ?></h1>
         </div>
 

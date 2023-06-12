@@ -18,7 +18,10 @@ include 'head.php';
     ?>
 
     <main>
-        <h1>Panier</h1>
+        <div class="boutique">
+            <h1>Panier</h1>
+        </div>
+
         <?php
         // *****************************************si je viens d'un bouton d'ajout : je déclenche l'ajout***********************************
         if (isset($_GET['productId'])) {
@@ -103,35 +106,35 @@ include 'head.php';
         ?>
             <div class="container text-center fs-5 p-5">
                 <div class="mx-auto m-2">
-                    <span class= "total">Prix total : <?= $total ?> €</span>
+                    <span class="total">Prix total : <?= $total ?> €</span>
                 </div>
-            
 
 
-            <!----------------------------------------------Bouton qui vide le panier ---------------------------------------------------->
 
-            <!-- je mets le bouton "vider panier" à l'interieur des {} du if = le bouton apparait seulement s'il y a au moins 1 article dans le panier-->
-            
+                <!----------------------------------------------Bouton qui vide le panier ---------------------------------------------------->
+
+                <!-- je mets le bouton "vider panier" à l'interieur des {} du if = le bouton apparait seulement s'il y a au moins 1 article dans le panier-->
+
                 <form method="POST" action="./panier.php">
                     <button type="submit" name="clearCart" class="btn btn-ghost-1 m-2">
                         Vider panier
                     </button>
                 </form>
-         
-            <!-------------------------------------------------Bouton qui valide le panier -------------------------------------------------->
 
-            
+                <!-------------------------------------------------Bouton qui valide le panier -------------------------------------------------->
+
+
                 <a href="./validation.php">
                     <button class="btn btn-ghost-2 m-2">
                         Validation panier
                     </button>
                 </a>
             </div>
-            
+
         <?php
 
         } else {
-            echo "<div class=\"text-center\">
+            echo "<div class=\" my-5 text-center\">
                      <p>Votre panier est vide.</p>
                     </div>";
         }

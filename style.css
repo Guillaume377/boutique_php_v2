@@ -46,12 +46,11 @@ h1 {
 h2.card-title {
     font-family: 'Satisfy', cursive;
     font-size: 250%;
-    color:white;
+    color: white;
     background-color: brown;
     display: flex;
     justify-content: center;
     margin: 1% 0%;
-    
 }
 
 .btn-ghost-1 {
@@ -107,6 +106,7 @@ nav {
 .navbar-brand {
     font-family: 'Satisfy', cursive;
     font-size: 200%;
+    padding: 15px 10px;
     color: brown;
 }
 
@@ -116,9 +116,12 @@ nav {
 
 .navbar-brand img {
     width: 25%;
-    border-radius:25px;
+    border-radius: 25px;
 }
 
+.navbar-toggler {
+    background-color: brown;
+}
 
 /* 3. INDEX
 =================================== */
@@ -166,7 +169,7 @@ nav {
     border-radius: 25px;
     box-shadow: 7px 3px 3px brown;
     color: brown !important;
-    margin-top: 5%;
+    margin: 5% 2% 0% 5%;
 }
 
 /* FOOTER
@@ -176,3 +179,133 @@ footer {
     color: brown;
     padding-top: 4%;
 }
+
+
+/* =================MEDIA QUERIES 1400px================ */
+
+@media screen and (max-width: 1400px) {
+
+    .boutique h1 {
+        font-size: 400%;
+        margin-top: 10%;
+    }
+}
+
+/* =================MEDIA QUERIES 1200px================ */
+
+@media screen and (max-width: 1200px) {
+
+    .button-nav {
+        margin: 0px 10px !important;
+    }
+
+
+    .button-card {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .btn {
+        margin: 10px 0px;
+    }
+
+    .titre-article h1 {
+        font-size: 350%;
+        margin-top: 18%;
+    }
+
+}
+
+/* =================MEDIA QUERIES 1063px================ */
+
+@media screen and (max-width: 1063px) {
+
+    .boutique h1 {
+        font-size: 300%;
+        margin-top: 14%;
+    }
+
+}
+
+/* =================MEDIA QUERIES 991px================ */
+
+@media screen and (max-width: 991px) {
+
+    .button-nav {
+        margin: 10px 350px !important;
+    }
+
+    .boutique h1 {
+        font-size: 250%;
+        margin-top: 17%;
+    }
+
+    .titre-article h1 {
+        margin-top: 21%;
+    }
+
+    .connexion {
+        width: 100%;
+    }
+}
+
+/* =================MEDIA QUERIES 875px================ */
+
+@media screen and (max-width: 875px) {
+
+    .boutique h1 {
+        margin-top: 19%;
+    }
+
+    .produit {
+        width: 50%;
+    }
+
+    .titre-article h1 {
+        font-size: 300%;
+        margin-top: 24%;
+    }
+}
+
+/* =================MEDIA QUERIES 720px================ */
+
+@media screen and (max-width: 720px) {
+
+    .boutique h1 {
+        margin-top: 23%;
+    }
+
+    .titre-article h1 {
+        margin-top: 27%;
+    }
+}
+
+/* =================MEDIA QUERIES 656px================ */
+
+@media screen and (max-width: 656px) {
+
+    .boutique h1 {
+        font-size: 200%;
+        margin-top: 26%;
+    }
+
+    .titre-article h1 {
+        margin-top: 30%;
+    }
+
+}
+
+/* =================MEDIA QUERIES 615px================ */
+
+@media screen and (max-width: 615px) {
+
+    .produit {
+        width: 100%;
+    }
+}
+
+
+
+/* =================MEDIA QUERIES 576px================ */
+
+@media screen and (max-width: 576px) {}

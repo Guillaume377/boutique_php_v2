@@ -22,10 +22,6 @@ function getConnection()
     return $db;
 }
 
-
-
-
-
 // ******************************** récupérer la liste des articles ************************************** */
 
 function getArticles()
@@ -72,10 +68,91 @@ function getArticlesByGamme($id)
     return $query->fetchAll();
 }
 
-function showArticles($getArticlesByGamme)
+function showArticles($getArticlesByGamme){}
+
+
+// **************************** Vérifier qu'aucun input n'est vide **************************
+
+function checkEmptyFields()
 {
+    foreach ($_POST as $field) {
+        if (empty($field)) {
+            return true;
+        }
+    }
+    return false;
 }
 
+// **************************** Vérifier la longueur des champs **************************
+
+function checkInputsLenght()
+{
+    $inputsLenghtOk = true;
+
+    if (strlen($_POST['nom']) > 25 || strlen($_POST['nom']) < 3) {
+        $inputsLenghtOk = false;
+    }
+
+    if (strlen($_POST['prenom']) > 25 || strlen($_POST['prenom']) < 3) {
+        $inputsLenghtOk = false;
+    }
+
+    if (strlen($_POST['email']) > 25 || strlen($_POST['email']) < 5) {
+        $inputsLenghtOk = false;
+    }
+
+    if (strlen($_POST['mot_de_passe']) > 25 || strlen($_POST['mot_de_passe']) < 5) {
+        $inputsLenghtOk = false;
+    }
+
+    if (strlen($_POST['adresse']) > 100 || strlen($_POST['adresse']) < 5) {
+        $inputsLenghtOk = false;
+    }
+
+    if (strlen($_POST['code_postal']) !== 5) {
+        $inputsLenghtOk = false;
+    }
+
+    if (strlen($_POST['ville']) > 40 || strlen($_POST['ville']) < 3) {
+        $inputsLenghtOk = false;
+    }
+
+    return $inputsLenghtOk;
+}
+
+
+// **************************** Vérifier si l'e-mail existe déjà dans le système de stockage (base de données) **************************
+
+
+function emailExist()
+{
+    // je me connecte à la base
+    $db = getConnection();
+
+    // je prépare ma requete pour recuperer si déjà un email
+    $query = $db->prepare('SELECT * FROM clients WHERE email = ?');
+
+    // j'exécute ma requête
+    $query->execute([$_POST['email']]);
+
+    // je vais chercher les résultats et je les stocke dans une variable
+    $client = $query->fetch();
+
+    if ($client) {
+        return true;    // L'e-mail existe déjà
+    } else {
+        return false;   //L'e-mail est nouveau
+    }
+}
+
+// **************************** Vérifier que le mot de passe réunit tous les critères demandés **************************
+
+function checkPassword($password)
+{
+    // minimum 8 caractères et maximum 15, minimum 1 lettre, 1 chiffre et 1 caractère spécial
+    $regex = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*?/&])(?=\S+$).{8,15}$^";
+    return preg_match($regex, $password);
+}
 
 // ********************************************** Vérifier cette inscription ***************************** 
 
@@ -84,94 +161,40 @@ function validInscription()
     // je me connecte à la bdd
     $db = getConnection();
 
-    // **************************** Vérifier qu'aucun input n'est vide **************************
-
-    function checkEmptyFields()
-    {
-        foreach ($_POST as $field) {
-            if (empty($field)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     if (checkEmptyFields()) {
         echo "Veuillez remplir tous les champs obligatoires.";
-    }
+    } else {
 
-
-    // **************************** Vérifier la longueur des champs **************************
-
-    function checkInputsLenght()
-    {
-        $inputsLenghtOk = true;
-
-        if (strlen($_POST['nom']) > 25 || strlen($_POST['nom']) < 3) {
-            $inputsLenghtOk = false;
-        }
-
-        if (strlen($_POST['prenom']) > 25 || strlen($_POST['prenom']) < 3) {
-            $inputsLenghtOk = false;
-        }
-
-        if (strlen($_POST['email']) > 25 || strlen($_POST['email']) < 5) {
-            $inputsLenghtOk = false;
-        }
-
-        if (strlen($_POST['mot_de_passe']) > 25 || strlen($_POST['mot_de_passe']) < 5) {
-            $inputsLenghtOk = false;
-        }
-
-        if (strlen($_POST['adresse']) > 100 || strlen($_POST['adresse']) < 5) {
-            $inputsLenghtOk = false;
-        }
-
-        if (strlen($_POST['code_postal']) !== 5) {
-            $inputsLenghtOk = false;
-        }
-
-        if (strlen($_POST['ville']) > 40 || strlen($_POST['ville']) < 3) {
-            $inputsLenghtOk = false;
-        }
-
-        return $inputsLenghtOk;
-    }
-
-    // **************************** Vérifier si l'e-mail existe déjà dans le système de stockage (base de données) **************************
-
-    function checkExistingEmail($email)
-    {
-        // Exemple simple : vérifier si l'e-mail existe dans un tableau prédéfini
-        $existingEmails = ['email'];
-
-        if (in_array($email, $existingEmails)) {
-            return true; // L'e-mail existe déjà
+        if (checkInputsLenght()) {
+           echo "Veuillez respecter le nombre de caractères.";
+            
         } else {
-            return false; // L'e-mail est nouveau
-        }
 
-        if (checkExistingEmail($email)) {
-            echo "l'email est déjà connu";
+            if (emailExist('email')) {
+                echo "Cet email existe déjà.";
+                
+            } else {
+
+                if (checkPassword('mot_de_passe')) {
+                    echo "Veuillez respecter les conditions requises.";
+                    
+                } else {
+
+                    // **************************** Hachage du mot de passe **************************
+
+                    $hashedPassword = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT);
+                }
+            }
         }
     }
-
-    // **************************** Vérifier que le mot de passe réunit tous les critères demandés **************************
-
-    function checkPassword($password)
-    {
-        // minimum 8 caractères et maximum 15, minimum 1 lettre, 1 chiffre et 1 caractère spécial
-        $regex = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*?/&])(?=\S+$).{8,15}$^";
-        return preg_match($regex, $password);
-    }
-
-    // **************************** Hachage du mot de passe **************************
-
-    $password = 'mot_de_passe';
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 }
 
 
+$SQL = INSERT INTO client (nom, prénom, email, mot de passe)
+VALUES 
+
+$query = $db->prepare('SELECT * FROM clients WHERE $_POST['nom','prenom','email','mot_de_passe'] = ?');
 
 
 
