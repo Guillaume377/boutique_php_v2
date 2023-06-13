@@ -17,22 +17,12 @@ include 'head.php';
     include 'header.php';
     ?>
 
-
-
-
     <?php
 
     if (isset($_POST['nom'])) {
         //var_dump($_POST);
         validInscription();
     }
-
-
-
-    //var_dump(checkInputsLenght())
-
-
-
 
 
     ?>

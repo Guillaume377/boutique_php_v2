@@ -25,13 +25,13 @@ include 'head.php';
 
         <div class="container">
             <div class="row">
-                <div class="col-md-5 connexion">
+                <div class="col-md-5 inscription">
 
                     <div class="text-center my-3">
                         <h2>Connexion</h2>
                     </div>
 
-                    <form method="POST" action="connexion.php">
+                    <form method="POST" action="index.php">
 
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email :</label>
@@ -58,7 +58,7 @@ include 'head.php';
 
                 <!-- ****************************** Inscription ******************************** -->
 
-                <div class="col-md-5 connexion">
+                <div class="col-md-5 inscription">
                     <div class="text-center my-3">
                         <h2>Inscription</h2>
                     </div>
@@ -92,7 +92,7 @@ include 'head.php';
 
                                 <div class="mb-3">
                                     <label for="mot_de_passe" class="form-label">Mot de passe : </label>
-                                    <input type="password" name="mot_de_passe" class="form-control" placeholder="(entre 8 et 15 caractères, min 1 lettre, 1 chiffre et 1 caractère spécial)"  id="exampleInputPassword1" required>
+                                    <input type="password" name="mot_de_passe" class="form-control" placeholder="(entre 8 et 15 caractères, min 1 lettre, 1 chiffre et 1 caractère spécial)" id="exampleInputPassword1" required>
                                 </div>
                            
                         

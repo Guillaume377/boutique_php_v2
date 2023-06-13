@@ -165,7 +165,7 @@ function validInscription()
         echo "Veuillez remplir tous les champs obligatoires.";
     } else {
 
-        if (checkInputsLenght()== false) {
+        if (checkInputsLenght() == false) {
             echo "Veuillez respecter le nombre de caractères.";
         } else {
 
@@ -212,10 +212,12 @@ function validInscription()
 
                     // je l'exécute avec le bon paramètre : mettre les variables dans l'ordre du VALUES (:nom, :prenom, :email, :mot_de_passe)
 
-                    $query->execute(["nom" => strip_tags($nom),
-                                     "prenom" => strip_tags($prenom), 
-                                     "email" => strip_tags($email), 
-                                     "mot_de_passe" => $hashedPassword]);
+                    $query->execute([
+                        "nom" => strip_tags($nom),
+                        "prenom" => strip_tags($prenom),
+                        "email" => strip_tags($email),
+                        "mot_de_passe" => $hashedPassword
+                    ]);
 
 
 
@@ -252,11 +254,53 @@ function creatAddress($user_id)
 
     // je l'exécute avec le bon paramètre : mettre les variables dans l'ordre du VALUES ()
 
-    $query->execute(["id_client" => $user_id, 
-                     "adresse" => strip_tags($adresse), 
-                     "code_postal" => strip_tags($code_postal), 
-                     "ville" => strip_tags($ville)]);
+    $query->execute([
+        "id_client" => $user_id,
+        "adresse" => strip_tags($adresse),
+        "code_postal" => strip_tags($code_postal),
+        "ville" => strip_tags($ville)
+    ]);
 }
+
+
+
+// ********************************************** Vérifier si le mot de passe est valide **********************
+//$mdpEnClair = $_POST['mot_de_passe'];
+//$mdpHashéBdd = $hashedPassword;
+
+
+//function password_verify($mdpEnClair, $mdpHashéBdd)
+{
+}
+
+
+// ****************************************************** Vérifier la connexion *******************************
+
+function connection()
+{
+
+    // je me connecte à la base
+    $db = getConnection();
+
+    // je prépare ma requete pour recuperer le mot de passe
+    $query = $db->prepare('SELECT * FROM clients WHERE mot_de_passe = ?');
+
+    // j'exécute ma requête
+    $query->execute([$_POST['mot_de_passe']]);
+
+    // je vais chercher les résultats et je les stocke dans une variable
+    $client = $query->fetch();
+
+    if ($client) {
+        return true;    // Le mot de passe existe déjà
+    } else {
+        return false;   // Le mot de passe n'est pas connu
+        echo "Le mot de passe n'est pas valide.";
+    }
+}
+
+
+
 
 // ********************************************* récupérer un article à partir de son id **********************
 

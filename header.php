@@ -11,6 +11,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <a href="./index.php" class="button-nav navbar-brand btn btn-ghost-2">Accueil</a>
         <a href="./gammes.php" class="button-nav navbar-brand btn btn-ghost-2">Gammes</a>
         <a href="./inscription.php" class="button-nav navbar-brand btn btn-ghost-2">Mon compte</a>
         <li class="nav-item me-auto">

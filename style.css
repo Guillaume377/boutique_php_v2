@@ -163,7 +163,7 @@ nav {
 /* 5. INSCRIPTION
 =================================== */
 
-.connexion {
+.inscription {
     background-color: white;
     border: 1px solid brown;
     border-radius: 25px;
@@ -216,6 +216,21 @@ footer {
 
 }
 
+/* =================MEDIA QUERIES 1099px================ */
+
+@media screen and (max-width: 1099px) {
+    .navbar-brand {
+        font-size: 150%;
+        padding: 20px 10px;
+    }
+
+    .boutique h1 {
+        font-size: 300%;
+        margin-top: 14%;
+    }
+
+}
+
 /* =================MEDIA QUERIES 1063px================ */
 
 @media screen and (max-width: 1063px) {
@@ -227,6 +242,19 @@ footer {
 
 }
 
+/* =================MEDIA QUERIES 1016px================ */
+
+@media screen and (max-width: 1016px) {
+    .navbar-brand {
+        font-size: 120%;
+        padding: 25px 10px;
+    }
+
+    .boutique h1 {
+        font-size: 280%;
+        margin-top: 18%;
+    }
+}
 /* =================MEDIA QUERIES 991px================ */
 
 @media screen and (max-width: 991px) {
@@ -244,7 +272,7 @@ footer {
         margin-top: 21%;
     }
 
-    .connexion {
+    .inscription {
         width: 100%;
     }
 }
