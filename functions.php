@@ -68,7 +68,9 @@ function getArticlesByGamme($id)
     return $query->fetchAll();
 }
 
-function showArticles($getArticlesByGamme){}
+function showArticles($getArticlesByGamme)
+{
+}
 
 
 // **************************** Vérifier qu'aucun input n'est vide **************************
@@ -98,10 +100,6 @@ function checkInputsLenght()
     }
 
     if (strlen($_POST['email']) > 25 || strlen($_POST['email']) < 5) {
-        $inputsLenghtOk = false;
-    }
-
-    if (strlen($_POST['mot_de_passe']) > 25 || strlen($_POST['mot_de_passe']) < 5) {
         $inputsLenghtOk = false;
     }
 
@@ -150,6 +148,7 @@ function emailExist()
 function checkPassword($password)
 {
     // minimum 8 caractères et maximum 15, minimum 1 lettre, 1 chiffre et 1 caractère spécial
+    // (?=.*[0-9])= minimum 1 chiffre ; (?=.*[a-zA-Z]) = minimum 1 lettre ; (?=.*[@$!%*?/&])(?=\S+$) = minimum 1 caractère spécial ; {8,15}$ = entre 8 et 15 caractères
     $regex = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*?/&])(?=\S+$).{8,15}$^";
     return preg_match($regex, $password);
 }
@@ -166,41 +165,98 @@ function validInscription()
         echo "Veuillez remplir tous les champs obligatoires.";
     } else {
 
-        if (checkInputsLenght()) {
-           echo "Veuillez respecter le nombre de caractères.";
-            
+        if (checkInputsLenght()== false) {
+            echo "Veuillez respecter le nombre de caractères.";
         } else {
 
-            if (emailExist('email')) {
+            if (emailExist()) {
                 echo "Cet email existe déjà.";
-                
             } else {
 
-                if (checkPassword('mot_de_passe')) {
+                if (checkPassword($_POST['mot_de_passe']) == false) {
                     echo "Veuillez respecter les conditions requises.";
-                    
                 } else {
 
-                    // **************************** Hachage du mot de passe **************************
+                    var_dump('test');
+                    // ********************************************** Hachage du mot de passe *******************************************
 
                     $hashedPassword = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT);
+
+
+                    // ********************************************* Sauvegarde utilisateur *********************************************
+
+                    $nom = $_POST['nom'];
+                    $prenom = $_POST['prenom'];
+                    $email = $_POST['email'];
+
+
+                    // ---------------------------------------------- SYNTAXE 1 : ? -------------------------------------------
+
+                    /* je prépare ma requête : INSERT INTO "ma table" (le nom exact des champs de ma table) VALUES ()
+
+                    $query = $db->prepare("INSERT INTO clients (nom, prenom, email, mot_de_passe) VALUES (?, ?, ?, ?)");
+
+
+                    // je l'exécute avec le bon paramètre : mettre les variables dans l'ordre du VALUES (?, ?, ?, ?)
+
+                    $query->execute([$nom, $prenom, $email, $hashedPassword]);*/
+
+
+
+                    // ----------------------------------------------OU SYNTAXE 2 : TABLEAU ASSOCIATIF -------------------------------------------
+
+                    // je prépare ma requête : INSERT INTO "ma table" (le nom exact des champs de ma table) VALUES (:nom de chaque champ)
+
+                    $query = $db->prepare("INSERT INTO clients (nom, prenom, email, mot_de_passe) VALUES (:nom, :prenom, :email, :mot_de_passe)");
+
+
+                    // je l'exécute avec le bon paramètre : mettre les variables dans l'ordre du VALUES (:nom, :prenom, :email, :mot_de_passe)
+
+                    $query->execute(["nom" => strip_tags($nom),
+                                     "prenom" => strip_tags($prenom), 
+                                     "email" => strip_tags($email), 
+                                     "mot_de_passe" => $hashedPassword]);
+
+
+
+
+                    // récupération de l'id de l'utilisateur créé
+                    $id = $db->lastInsertId();
+
+                    // insertion de adresse dans la table "adresses"
+                    creatAddress($id);
+
+                    // on renvoie un message de succès
+                    echo '<script>alert(\'Le compte a bien été créé !\')</script>';
                 }
             }
         }
     }
 }
 
+// ******************************** Insertion de l'adresse en base de données (SYNTAXE 2) ******************
 
-$SQL = INSERT INTO client (nom, prénom, email, mot de passe)
-VALUES 
+function creatAddress($user_id)
 
-$query = $db->prepare('SELECT * FROM clients WHERE $_POST['nom','prenom','email','mot_de_passe'] = ?');
+{
+    $db = getConnection();
+
+    $adresse = $_POST['adresse'];
+    $code_postal = $_POST['code_postal'];
+    $ville = $_POST['ville'];
+
+    // je prépare ma requête : INSERT INTO "ma table" (le nom exact des champs de ma table) VALUES (:nom de chaque champ)
+
+    $query = $db->prepare("INSERT INTO adresses (id_client, adresse, code_postal, ville) VALUES (:id_client, :adresse, :code_postal, :ville)");
 
 
+    // je l'exécute avec le bon paramètre : mettre les variables dans l'ordre du VALUES ()
 
-
-
-
+    $query->execute(["id_client" => $user_id, 
+                     "adresse" => strip_tags($adresse), 
+                     "code_postal" => strip_tags($code_postal), 
+                     "ville" => strip_tags($ville)]);
+}
 
 // ********************************************* récupérer un article à partir de son id **********************
 

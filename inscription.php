@@ -39,7 +39,7 @@ include 'head.php';
                         </div>
 
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Mot de passe :</label>
+                            <label for="exampleInputPassword1" class="form-label">Mot de passe : </label>
                             <input type="password" name="motdepasse" class="form-control" id="exampleInputPassword1">
                         </div>
 
@@ -83,19 +83,19 @@ include 'head.php';
 
                         <!-- ****************************** champ "email" + "mot_de_passe" ***************** -->
 
-                        <div class="row">
-                            <div class="d-flex justify-content-between">
-                                <div class="mb-3 w-50">
+                        
+                           
+                                <div class="mb-3">
                                     <label for="email" class="form-label">Email :</label>
                                     <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ajouter votre email" required>
-                                </div>
+                                 </div>
 
-                                <div class="mb-3 w-50 ps-3">
-                                    <label for="mot_de_passe" class="form-label">Mot de passe :</label>
-                                    <input type="password" name="mot_de_passe" class="form-control" id="exampleInputPassword1" required>
+                                <div class="mb-3">
+                                    <label for="mot_de_passe" class="form-label">Mot de passe : </label>
+                                    <input type="password" name="mot_de_passe" class="form-control" placeholder="(entre 8 et 15 caractères, min 1 lettre, 1 chiffre et 1 caractère spécial)"  id="exampleInputPassword1" required>
                                 </div>
-                            </div>
-                        </div>
+                           
+                        
 
                         <!-- ****************************** champ "adresse" ******************************** -->
 

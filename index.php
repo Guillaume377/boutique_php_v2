@@ -21,10 +21,36 @@ include 'head.php';
     <main>
 
         <div class="boutique">
-                <h1>Boutique des beaux-arts</h1>
+            <h1>Boutique des beaux-arts</h1>
         </div>
         <div class="container-fluid">
-           
+
+            <div class="text-center my-3">
+                <h2>Connexion</h2>
+            </div>
+            <form method="POST" action="connexion.php">
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email :</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ajouter votre email" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Mot de passe : </label>
+                    <input type="password" name="motdepasse" class="form-control" id="exampleInputPassword1">
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Se souvenir de moi</label>
+                </div>
+
+                <div class="d-flex justify-content-center mt-5">
+                    <a href="./connexion.php"><button type="submit" class="btn btn-ghost-1">Se connecter</button>
+                    </a>
+                </div>
+
+            </form>
             <div class="row list">
 
                 <?php
