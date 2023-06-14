@@ -66,18 +66,18 @@ include 'head.php';
 
             foreach ($_SESSION['panier'] as $article) {
 
-                echo "<div class=\"container\"> 
+                echo "<div class=\"container pt-5\"> 
                 <div class=\"row\">
                    <div class=\"col-md-2\">
-                        <img src=\"./images/" . $article['picture'] . "\" class=\" card-img-top\" alt=\"...\">
+                        <img src=\"./images/" . $article['image'] . "\" class=\" card-img-top\" alt=\"...\">
                    </div>
 
                    <div class=\"col-md-2\">
-                        <h5 class=\"card-title\">" . $article['name'] . "</h5>
+                        <h5 class=\"card-title\">" . $article['nom'] . "</h5>
                    </div>
 
                    <div class=\"col-md-1\">
-                        <p class=\"card-text\">" . $article['price'] . " €</p>
+                        <p class=\"card-text\">" . $article['prix'] . " €</p>
                    </div>
 
                     <form class=\"col-lg-3\" action=\"panier.php\" method=\"POST\">
@@ -140,6 +140,7 @@ include 'head.php';
         }
 
         ?>
+
     </main>
 
     <?php

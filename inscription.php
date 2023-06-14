@@ -40,7 +40,7 @@ include 'head.php';
 
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Mot de passe : </label>
-                            <input type="password" name="motdepasse" class="form-control" id="exampleInputPassword1">
+                            <input type="password" name="mot_de_passe" class="form-control" id="exampleInputPassword1">
                         </div>
 
                         <div class="mb-3 form-check">

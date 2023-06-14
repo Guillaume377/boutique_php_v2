@@ -15,6 +15,27 @@ include 'head.php';
 ?>
 
 <body>
+
+    <!-- Déclencher la fonction "connexion" -->
+    <?php
+    if (isset($_POST['email'])) {
+        //var_dump($_POST);
+        createConnection();
+    }
+
+
+    //Déclencher la fonction "déconnexion"
+
+    if (isset($_POST['deconnexion'])) {
+
+        deconnexion();
+    }
+    ?>
+
+
+
+
+
     <?php
     include 'header.php';
     ?>
@@ -25,30 +46,25 @@ include 'head.php';
         </div>
 
 
-            <!-- Déclencher la fonction connexion -->
+
+
+
+
+        <div class="row list">
 
             <?php
-            if (isset($_POST['email'])) {
-                //var_dump($_POST);
-                connection();
-            }
-            ?>
+            // je déclare la variable qui contient mon tableau d'articles
+            // sa valeur,c'est le tableau d'articles renvoyé par la fonction getArticles
+            $articles = getArticles();
 
-            <div class="row list">
+            // je teste cette variable pour vérifier que l'ai bien mes 3 articles
+            //var_dump($articles);
 
-                <?php
-                // je déclare la variable qui contient mon tableau d'articles
-                // sa valeur,c'est le tableau d'articles renvoyé par la fonction getArticles
-                $articles = getArticles();
+            //ou à la place des 2($articles = getArticles() + var_dump($articles)), je mets la fonction plus courte = var_dump(getArticles)
 
-                // je teste cette variable pour vérifier que l'ai bien mes 3 articles
-                //var_dump($articles);
-
-                //ou à la place des 2($articles = getArticles() + var_dump($articles)), je mets la fonction plus courte = var_dump(getArticles)
-
-                //je lance ma boucle pour afficher une card bootstrap par article
-                foreach ($articles as $article) {
-                    echo "<div class=\"produit col-sm-4 p-5 h-75\">
+            //je lance ma boucle pour afficher une card bootstrap par article
+            foreach ($articles as $article) {
+                echo "<div class=\"produit col-sm-4 p-5 h-75\">
                                 <div class=\"card text-center\">
                                 <img src=\"./images/" . $article['image'] . "\" class=\"card-img-top mx-auto w-75\" alt=\"...\">
                                 <div class=\"card-body\">
@@ -69,16 +85,16 @@ include 'head.php';
                                 </div>  
                                 </div>
                             </div>";
-                }
-                // Pour faire fonctionner le Foreach, je mets des "" (echo "... et ...</div>";) ainsi qu'un \ avant chaque " .
+            }
+            // Pour faire fonctionner le Foreach, je mets des "" (echo "... et ...</div>";) ainsi qu'un \ avant chaque " .
 
-                if (isset($_POST['commandeValidee'])) {
-                    // je déclenche la fonction de vider le panier
-                    clearCart();
-                }
-                ?>
+            if (isset($_POST['commandeValidee'])) {
+                // je déclenche la fonction de vider le panier
+                clearCart();
+            }
+            ?>
 
-            </div>
+        </div>
         </div>
     </main>
 

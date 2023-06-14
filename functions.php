@@ -136,11 +136,7 @@ function emailExist()
     // je vais chercher les résultats et je les stocke dans une variable
     $client = $query->fetch();
 
-    if ($client) {
-        return true;    // L'e-mail existe déjà
-    } else {
-        return false;   //L'e-mail est nouveau
-    }
+    return $client;
 }
 
 // **************************** Vérifier que le mot de passe réunit tous les critères demandés **************************
@@ -219,9 +215,6 @@ function validInscription()
                         "mot_de_passe" => $hashedPassword
                     ]);
 
-
-
-
                     // récupération de l'id de l'utilisateur créé
                     $id = $db->lastInsertId();
 
@@ -251,7 +244,6 @@ function creatAddress($user_id)
 
     $query = $db->prepare("INSERT INTO adresses (id_client, adresse, code_postal, ville) VALUES (:id_client, :adresse, :code_postal, :ville)");
 
-
     // je l'exécute avec le bon paramètre : mettre les variables dans l'ordre du VALUES ()
 
     $query->execute([
@@ -260,48 +252,88 @@ function creatAddress($user_id)
         "code_postal" => strip_tags($code_postal),
         "ville" => strip_tags($ville)
     ]);
+    
 }
 
 
-
-// ********************************************** Vérifier si le mot de passe est valide **********************
-//$mdpEnClair = $_POST['mot_de_passe'];
-//$mdpHashéBdd = $hashedPassword;
+// ************************************************* Modification des informations **************************************
 
 
-//function password_verify($mdpEnClair, $mdpHashéBdd)
+function modifinfos()
 {
-}
+    $db = getConnection();
 
+    $query = $db->prepare("UPDATE clients (nom, prenom, email) VALUES (:nom, :prenom, :email)");
+
+    $query->execute([
+        "nom" => strip_tags($_POST['nom']),
+        "prenom" => strip_tags($_POST['prenom']),
+        "email" => strip_tags($_POST['email']),
+    ]);
+
+    // on renvoie un message de succès
+    echo '<script>alert(\'Les modifications ont été enregistrées !\')</script>';
+    
+}
+// ************************************************* Modification de l'adresse **************************************
+
+
+function modifadresse()
+{
+    $db = getConnection();
+
+    $query = $db->prepare("UPDATE clients (adresse, code_postal, ville) VALUES (:adresse, :code_postal, :ville)");
+
+    $query->execute([
+        "adresse" => strip_tags($_POST['adresse']),
+        "code_postal" => strip_tags($_POST['code_postal']),
+        "ville" => strip_tags($_POST['ville']),
+    ]);
+
+    // on renvoie un message de succès
+    echo '<script>alert(\'Les modifications ont été enregistrées !\')</script>';
+    
+}
 
 // ****************************************************** Vérifier la connexion *******************************
 
-function connection()
+function createConnection()
 {
 
     // je me connecte à la base
     $db = getConnection();
 
-    // je prépare ma requete pour recuperer le mot de passe
-    $query = $db->prepare('SELECT * FROM clients WHERE mot_de_passe = ?');
+    //je récupère le client s'il existe
+    $client= emailExist();
 
-    // j'exécute ma requête
-    $query->execute([$_POST['mot_de_passe']]);
+    if ($client==true) {
 
-    // je vais chercher les résultats et je les stocke dans une variable
-    $client = $query->fetch();
-
-    if ($client) {
-        return true;    // Le mot de passe existe déjà
+    //function password_verify($mdpEnClair, $mdpHashéBdd)
+        if (password_verify($_POST['mot_de_passe'], $client['mot_de_passe'])){
+            $_SESSION['client']= $client;
+            echo '<script>alert(\'Vous êtes connectés!\')</script>';
+            
+        }
+        else {
+            echo "Votre mot de passe est incorrect !";
+        }
     } else {
-        return false;   // Le mot de passe n'est pas connu
-        echo "Le mot de passe n'est pas valide.";
+        echo "Vous n'avez pas de compte client !";
     }
 }
 
+// ****************************************************** Se déconnecter de son compte ******************************
+
+function deconnexion()
+
+{
+    $_SESSION['client'] = [];
 
 
+// on renvoie un message de succès
+echo '<script>alert(\'Vous êtes déconnectés!\')</script>';
 
+}
 // ********************************************* récupérer un article à partir de son id **********************
 
 function getArticleFromId($id)
@@ -367,7 +399,7 @@ function calculerPrixTotal()
 
     foreach ($_SESSION['panier'] as $article) {
 
-        $prixTotal += $article['price'] * $article['quantite']; //prix multiplié par la quantité + cumul du total
+        $prixTotal += $article['prix'] * $article['quantite']; //prix multiplié par la quantité + cumul du total
     }
     return $prixTotal;
 }

@@ -106,7 +106,7 @@ nav {
 .navbar-brand {
     font-family: 'Satisfy', cursive;
     font-size: 200%;
-    padding: 15px 10px;
+    padding: 20px 10px;
     color: brown;
 }
 
@@ -172,6 +172,25 @@ nav {
     margin: 5% 2% 0% 5%;
 }
 
+/* 6. MON COMPTE
+=================================== */
+
+.logo-font {
+    font-size: 500%;
+    padding-bottom: 5%;
+}
+
+.button-infos {
+    font-size: 130% !important;
+}
+
+
+/* 7. MODIFINFOS et MODIFADRESSE
+=================================== */
+
+.modifinfos {
+    padding: 2% 30%;
+}
 /* FOOTER
 =================================== */
 
