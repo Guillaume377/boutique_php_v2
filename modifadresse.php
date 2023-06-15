@@ -15,9 +15,20 @@ include 'head.php';
 ?>
 
 <body>
+
+    <?php
+    //Déclencher la fonction "modifadresse"
+
+    if (isset($_POST['adresse'])) {
+//var_dump($_POST);
+        modifadresse();
+    }
+    ?>
+
     <?php
     include 'header.php';
     ?>
+
     <main>
 
         <div class="boutique">
@@ -30,12 +41,12 @@ include 'head.php';
 
             <div class="modifinfos">
                 <label for="adresse" class="form-label">Adresse :</label>
-                <input type="text" name="adresse" class="form-control" placeholder="exemple : 7 rue de la Tour Eiffel en allumettes" required>
+                <input type="text" name="adresse" class="form-control" value="<?php echo $_SESSION['adresse']['adresse'] ?>" required>
             </div>
 
             <div class="modifinfos">
                 <label for="code_postal" class="form-label">Code postal :</label>
-                <input type="text" name="code_postal" class="form-control" placeholder="exemple : 45200" required>
+                <input type="text" name="code_postal" class="form-control" value="<?php echo $_SESSION['adresse']['code_postal'] ?>" required>
             </div>
 
 
@@ -43,7 +54,7 @@ include 'head.php';
 
             <div class="modifinfos">
                 <label for="ville" class="form-label">Ville :</label>
-                <input type="text" name="ville" class="form-control" placeholder="MONTARGIS" required>
+                <input type="text" name="ville" class="form-control" value="<?php echo $_SESSION['adresse']['ville'] ?>" required>
             </div>
 
             <!-- ****************************** bouton ************************** -->
@@ -71,16 +82,7 @@ include 'head.php';
             </div>
         </div>
 
-        <?php
-        //Déclencher la fonction "modifadresse"
-
-        if (isset($_POST['modifadresse'])) {
-
-            modifadresse();
-        }
-        ?>
-
-
+     
 
 
     </main>

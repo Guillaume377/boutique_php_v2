@@ -52,18 +52,6 @@ include 'head.php';
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     </main>
 
     <?php

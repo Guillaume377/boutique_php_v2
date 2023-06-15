@@ -15,9 +15,21 @@ include 'head.php';
 ?>
 
 <body>
+
+
+    <?php
+    //Déclencher la fonction "modifinfos"
+
+    if (isset($_POST['nom'])) {
+
+        modifinfos();
+    }
+    ?>
+
     <?php
     include 'header.php';
     ?>
+    
     <main>
 
         <div class="boutique">
@@ -30,12 +42,12 @@ include 'head.php';
 
             <div class="modifinfos">
                 <label for="nom" class="form-label">Nom :</label>
-                <input type="text" name="nom" class="form-control" placeholder="exemple : LEBLANC">
+                <input type="text" name="nom" class="form-control" value="<?php echo $_SESSION['client']['nom'] ?>" required>
             </div>
 
             <div class="modifinfos">
                 <label for="prenom" class="form-label">Prénom :</label>
-                <input type="text" name="prenom" class="form-control" placeholder="exemple : Juste">
+                <input type="text" name="prenom" class="form-control" value="<?php echo $_SESSION['client']['prenom'] ?>" required>
             </div>
 
 
@@ -43,7 +55,7 @@ include 'head.php';
 
             <div class="modifinfos">
                 <label for="email" class="form-label">Email :</label>
-                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ajouter votre email">
+                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo $_SESSION['client']['email'] ?>" required>
             </div>
 
             <!-- ****************************** bouton ************************** -->
@@ -72,15 +84,6 @@ include 'head.php';
         </div>
 
 
-
-        <?php
-        //Déclencher la fonction "modifinfos"
-
-        if (isset($_POST['nom'])) {
-
-            modifinfos();
-        }
-        ?>
 
     </main>
 

@@ -15,14 +15,48 @@ include 'head.php';
 ?>
 
 <body>
+
+
+
+    <?php
+    //Déclencher la fonction "modifmdp"
+
+    if (isset($_POST['modifMdp'])) {
+        //var_dump($_POST);
+        modifMotDePasse();
+    }
+    ?>
+
     <?php
     include 'header.php';
     ?>
     <main>
 
-    <div class="boutique">
+        <div class="boutique">
             <h1>Mon mot de passe</h1>
         </div>
+
+        <!-- ****************************** champ "ancien MDP + nouveau MDP"  ***************** -->
+        <form method="POST" action="modifmdp.php">
+            <div class="mb-3 modifmdp">
+                <label for="exampleInputPassword1" class="form-label">Mot de passe actuel : </label>
+                <input type="password" name="oldPassword" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3 modifmdp">
+                <label for="exampleInputPassword1" class="form-label">Nouveau mot de passe : </label>
+                <input type="password" name="newPassword" class="form-control" id="exampleInputPassword1">
+            </div>
+
+            <!-- ****************************** bouton ************************** -->
+
+            <div class="d-flex justify-content-center mb-2">
+                <button type="submit" name="modifMdp" class="btn btn-ghost-1 ">Modifier mon mot de passe</button>
+            </div>
+        </form>
+
+
+
+
 
         <div class="container d-flex justify-content-between">
             <div class="row text-center col-md-4 p-5">

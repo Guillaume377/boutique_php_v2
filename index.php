@@ -30,7 +30,17 @@ include 'head.php';
 
         deconnexion();
     }
-    ?>
+
+
+
+    //Déclencher la fonction "modifMotDePasse"
+
+    //if (isset($_POST['mot_de_passe'])) {
+
+        //modifMotDePasse();
+    //}
+   ?>
+
 
 
 

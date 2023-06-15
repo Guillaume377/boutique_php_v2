@@ -91,28 +91,40 @@ function checkInputsLenght()
 {
     $inputsLenghtOk = true;
 
-    if (strlen($_POST['nom']) > 25 || strlen($_POST['nom']) < 3) {
-        $inputsLenghtOk = false;
+    if (isset($_POST['nom'])) {
+        if (strlen($_POST['nom']) > 25 || strlen($_POST['nom']) < 3) {
+            $inputsLenghtOk = false;
+        }
     }
 
-    if (strlen($_POST['prenom']) > 25 || strlen($_POST['prenom']) < 3) {
-        $inputsLenghtOk = false;
+    if (isset($_POST['prenom'])) {
+        if (strlen($_POST['prenom']) > 25 || strlen($_POST['prenom']) < 3) {
+            $inputsLenghtOk = false;
+        }
     }
 
-    if (strlen($_POST['email']) > 25 || strlen($_POST['email']) < 5) {
-        $inputsLenghtOk = false;
+    if (isset($_POST['email'])) {
+        if (strlen($_POST['email']) > 25 || strlen($_POST['email']) < 5) {
+            $inputsLenghtOk = false;
+        }
     }
 
-    if (strlen($_POST['adresse']) > 100 || strlen($_POST['adresse']) < 5) {
-        $inputsLenghtOk = false;
+    if (isset($_POST['adresse'])) {
+        if (strlen($_POST['adresse']) > 100 || strlen($_POST['adresse']) < 5) {
+            $inputsLenghtOk = false;
+        }
     }
 
-    if (strlen($_POST['code_postal']) !== 5) {
-        $inputsLenghtOk = false;
+    if (isset($_POST['code_postal'])) {
+        if (strlen($_POST['code_postal']) !== 5) {
+            $inputsLenghtOk = false;
+        }
     }
 
-    if (strlen($_POST['ville']) > 40 || strlen($_POST['ville']) < 3) {
-        $inputsLenghtOk = false;
+    if (isset($_POST['ville'])) {
+        if (strlen($_POST['ville']) > 40 || strlen($_POST['ville']) < 3) {
+            $inputsLenghtOk = false;
+        }
     }
 
     return $inputsLenghtOk;
@@ -252,7 +264,6 @@ function creatAddress($user_id)
         "code_postal" => strip_tags($code_postal),
         "ville" => strip_tags($ville)
     ]);
-    
 }
 
 
@@ -261,39 +272,148 @@ function creatAddress($user_id)
 
 function modifinfos()
 {
+    // je me connecte à la bdd
     $db = getConnection();
 
-    $query = $db->prepare("UPDATE clients (nom, prenom, email) VALUES (:nom, :prenom, :email)");
+    if (checkEmptyFields()) {
+        echo '<script>alert(\'Veuillez remplir tous les champs obligatoires.\')</script>';
+    } else {
 
-    $query->execute([
-        "nom" => strip_tags($_POST['nom']),
-        "prenom" => strip_tags($_POST['prenom']),
-        "email" => strip_tags($_POST['email']),
-    ]);
+        if (checkInputsLenght() == false) {
+            echo '<script>alert(\'Veuillez respecter le nombre de caractères.\')</script>';
+        } else {
 
-    // on renvoie un message de succès
-    echo '<script>alert(\'Les modifications ont été enregistrées !\')</script>';
-    
+            // je prépare ma requête : MISE A JOUR des informations
+            $query = $db->prepare("UPDATE clients SET nom=:nom, prenom=:prenom, email=:email WHERE id=:id");
+
+            // je l'exécute avec les bons paramètres
+            $query->execute([
+                "id" => $_SESSION['client']['id'],
+                "nom" => strip_tags($_POST['nom']),
+                "prenom" => strip_tags($_POST['prenom']),
+                "email" => strip_tags($_POST['email']),
+            ]);
+
+            $_SESSION['client']['nom'] = strip_tags($_POST['nom']);
+            $_SESSION['client']['prenom'] = strip_tags($_POST['prenom']);
+            $_SESSION['client']['email'] = strip_tags($_POST['email']);
+
+            // on renvoie un message de succès
+            echo '<script>alert(\'Les modifications ont été enregistrées !\')</script>';
+        }
+    }
 }
+
+
 // ************************************************* Modification de l'adresse **************************************
 
 
 function modifadresse()
 {
+    // je me connecte à la bdd
     $db = getConnection();
 
-    $query = $db->prepare("UPDATE clients (adresse, code_postal, ville) VALUES (:adresse, :code_postal, :ville)");
+    if (checkEmptyFields()) {
+        echo '<script>alert(\'Veuillez remplir tous les champs obligatoires.\')</script>';
+    } else {
 
-    $query->execute([
-        "adresse" => strip_tags($_POST['adresse']),
-        "code_postal" => strip_tags($_POST['code_postal']),
-        "ville" => strip_tags($_POST['ville']),
-    ]);
+        if (checkInputsLenght() == false) {
+            echo '<script>alert(\'Veuillez respecter le nombre de caractères.\')</script>';
+        } else {
 
-    // on renvoie un message de succès
-    echo '<script>alert(\'Les modifications ont été enregistrées !\')</script>';
-    
+            // je prépare ma requête : MISE A JOUR des informations
+            $query = $db->prepare("UPDATE adresses SET adresse=:adresse, code_postal=:code_postal, ville=:ville WHERE id_client=:id_client");
+
+            // je l'exécute avec les bons paramètres
+            $query->execute([
+                "id_client" => $_SESSION['adresse']['id_client'],
+                "adresse" => strip_tags($_POST['adresse']),
+                "code_postal" => strip_tags($_POST['code_postal']),
+                "ville" => strip_tags($_POST['ville']),
+            ]);
+
+            $_SESSION['adresse']['adresse'] = strip_tags($_POST['adresse']);
+            $_SESSION['adresse']['code_postal'] = strip_tags($_POST['code_postal']);
+            $_SESSION['adresse']['ville'] = strip_tags($_POST['ville']);
+
+            // on renvoie un message de succès
+            echo '<script>alert(\'Les modifications ont été enregistrées !\')</script>';
+        }
+    }
 }
+
+// ************************************************* adresse liée à l'id client **************************************
+
+function getAddressFromId()
+{
+    // je me connecte à la base
+    $db = getConnection();
+
+    // je prépare ma requete pour recuperer 
+    $query = $db->prepare('SELECT * FROM adresses WHERE id_client = ?');
+
+    // j'exécute ma requête
+    $query->execute([$_SESSION['client']['id']]);
+
+    // je vais chercher les résultats et je les stocke dans une variable
+    return $query->fetch();
+}
+
+
+
+// ************************************************* Modification du mot de passe **************************************
+
+function modifMotDePasse()
+{
+
+    // je me connecte à la bdd
+    $db = getConnection();
+
+    //1.  je vérifie s'il y a des champs libres
+    if (checkEmptyFields()) {
+        echo '<script>alert(\'Veuillez remplir tous les champs obligatoires.\')</script>';
+    } else {
+
+
+        //2. je récupère le mot de passe existant (/!\ pas de variable dans un prepare)
+        $query = $db->prepare('SELECT mot_de_passe FROM clients WHERE id = ?');
+
+        $query->execute([$_SESSION['client']['id']]);
+
+        $motDePasseActuel = $query->fetch();
+
+
+        //3. je vérifie si le MDP actuel = MDP en base
+        if ($motDePasseActuel != $_POST['oldPassword']) {
+            echo "Le mot de passe est erroné !";
+        } else {
+
+            //4. je vérifie que le mot de passe respecte les critères
+
+            if (checkPassword($_POST['newPassword']) == false) {
+                echo '<script>alert(\'Veuillez respecter les conditions requises.\')</script>';
+            } else {
+
+                //5. Hachage du nouveau mot de passe 
+                $motDePasseActuel = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
+
+
+                //6. je prépare la mise à jour
+
+                $query = $db->prepare("UPDATE clients SET mot_de_passe=:mot_de_passe WHERE id=:id");
+
+                // 7. je l'exécute avec les bon paramètres
+                $query->execute([
+                    "newPassword" => strip_tags($_POST['newPassword']),
+                ]);
+
+                // on renvoie un message de succès
+                echo '<script>alert(\'Les modifications ont été enregistrées !\')</script>';
+            }
+        }
+    }
+}
+
 
 // ****************************************************** Vérifier la connexion *******************************
 
@@ -304,17 +424,16 @@ function createConnection()
     $db = getConnection();
 
     //je récupère le client s'il existe
-    $client= emailExist();
+    $client = emailExist();
 
-    if ($client==true) {
+    if ($client == true) {
 
-    //function password_verify($mdpEnClair, $mdpHashéBdd)
-        if (password_verify($_POST['mot_de_passe'], $client['mot_de_passe'])){
-            $_SESSION['client']= $client;
+        if (password_verify($_POST['mot_de_passe'], $client['mot_de_passe'])) {
+            $_SESSION['client'] = $client;
+            $address = getAddressFromId();
+            $_SESSION['adresse'] = $address;
             echo '<script>alert(\'Vous êtes connectés!\')</script>';
-            
-        }
-        else {
+        } else {
             echo "Votre mot de passe est incorrect !";
         }
     } else {
@@ -330,9 +449,8 @@ function deconnexion()
     $_SESSION['client'] = [];
 
 
-// on renvoie un message de succès
-echo '<script>alert(\'Vous êtes déconnectés!\')</script>';
-
+    // on renvoie un message de succès
+    echo '<script>alert(\'Vous êtes déconnectés!\')</script>';
 }
 // ********************************************* récupérer un article à partir de son id **********************
 
