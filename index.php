@@ -16,30 +16,39 @@ include 'head.php';
 
 <body>
 
-    <!-- Déclencher la fonction "connexion" -->
     <?php
+
+    //Déclencher la fonction "connexion"
     if (isset($_POST['email'])) {
         //var_dump($_POST);
         createConnection();
     }
 
-
     //Déclencher la fonction "déconnexion"
-
     if (isset($_POST['deconnexion'])) {
 
         deconnexion();
     }
 
-
-
     //Déclencher la fonction "modifMotDePasse"
+    if (isset($_POST['mot_de_passe'])) {
 
-    //if (isset($_POST['mot_de_passe'])) {
+        modifMotDePasse();
+    }
 
-        //modifMotDePasse();
-    //}
-   ?>
+    //Déclencher la fonction " enregistrerCommande" (validation de la commande)
+    if (isset($_POST['clearCart'])) {
+        //var_dump($_POST);
+        enregistrerCommande($prixTotal);
+    }
+    
+    // je déclenche la fonction de vider le panier
+    if (isset($_POST['commandeValidee'])) {
+        
+        clearCart();
+    }
+    
+    ?>
 
 
 
@@ -98,10 +107,7 @@ include 'head.php';
             }
             // Pour faire fonctionner le Foreach, je mets des "" (echo "... et ...</div>";) ainsi qu'un \ avant chaque " .
 
-            if (isset($_POST['commandeValidee'])) {
-                // je déclenche la fonction de vider le panier
-                clearCart();
-            }
+          
             ?>
 
         </div>

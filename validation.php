@@ -14,12 +14,32 @@ include 'head.php';
 ?>
 
 <body>
+
+    <?php
+    //Déclencher la fonction "modifinfos"
+
+    if (isset($_POST['nom'])) {
+
+        modifinfos();
+    }
+
+    //Déclencher la fonction "modifadresse"
+
+    if (isset($_POST['adresse'])) {
+        //var_dump($_POST);
+        modifadresse();
+    }
+    ?>
+
     <?php
     include 'header.php';
     ?>
 
     <main>
-        <h1>Validation</h1>
+        <div class="boutique">
+            <h1>Validation</h1>
+        </div>
+
         <?php
 
         if (count($_SESSION['panier']) > 0) { //s'il y a au moins 1 élément dans le panier
@@ -28,18 +48,18 @@ include 'head.php';
 
             foreach ($_SESSION['panier'] as $article) {
 
-                echo "<div class=\"container\"> 
+                echo "<div class=\"container pt-5\"> 
                     <div class=\"row\">
                         <div class=\"col-md-2\">
-                        <img src=\"./images/" . $article['picture'] . "\" class=\" card-img-top\" alt=\"...\">
+                        <img src=\"./images/" . $article['image'] . "\" class=\" card-img-top\" alt=\"...\">
                     </div>
 
                     <div class=\"col-md-2\">
-                    <h5 class=\"card-title\">" . $article['name'] . "</h5>
+                    <h5 class=\"card-title\">" . $article['nom'] . "</h5>
                     </div>
 
                     <div class=\"col-md-1\">
-                    <p class=\"card-text\">" . $article['price'] . " €</p>
+                    <p class=\"card-text\">" . $article['prix'] . " €</p>
                     </div> 
 
                     <div class=\"col-md-1\">
@@ -69,8 +89,87 @@ include 'head.php';
             <div class="d-flex flex-column m-2">
                 <span class="total">Total de la commande : <?= $totalorder ?> €</span>
             </div>
+        </div>
 
 
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Coordonnées</h3>
+                    <div class="inscription">
+                        <form method="POST" action="validation.php">
+
+                            <!-- ****************************** champ "nom" + "prénom" ****************************** -->
+
+                            <div class="modifcoordos">
+                                <label for="nom" class="form-label">Nom :</label>
+                                <input type="text" name="nom" class="form-control" value="<?php echo $_SESSION['client']['nom'] ?>" required>
+                            </div>
+
+                            <div class="modifcoordos">
+                                <label for="prenom" class="form-label">Prénom :</label>
+                                <input type="text" name="prenom" class="form-control" value="<?php echo $_SESSION['client']['prenom'] ?>" required>
+                            </div>
+
+
+                            <!-- ****************************** champ "email"  ***************** -->
+
+                            <div class="modifcoordos">
+                                <label for="email" class="form-label">Email :</label>
+                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo $_SESSION['client']['email'] ?>" required>
+                            </div>
+
+                            <!-- ****************************** bouton ************************** -->
+
+                            <div class="d-flex justify-content-center mb-2">
+                                <button type="submit" class="btn btn-ghost-1 ">Valider</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <h3>Adresse de livraison</h3>
+
+                    <div class="inscription">
+                        <form method="POST" action="validation.php">
+
+                            <!-- ****************************** champ "adresse" + "code postal" ****************************** -->
+
+                            <div class="modifcoordos">
+                                <label for="adresse" class="form-label">Adresse :</label>
+                                <input type="text" name="adresse" class="form-control" value="<?php echo $_SESSION['adresse']['adresse'] ?>" required>
+                            </div>
+
+                            <div class="modifcoordos">
+                                <label for="code_postal" class="form-label">Code postal :</label>
+                                <input type="text" name="code_postal" class="form-control" value="<?php echo $_SESSION['adresse']['code_postal'] ?>" required>
+                            </div>
+
+
+                            <!-- ****************************** champ "ville"  ***************** -->
+
+                            <div class="modifcoordos">
+                                <label for="ville" class="form-label">Ville :</label>
+                                <input type="text" name="ville" class="form-control" value="<?php echo $_SESSION['adresse']['ville'] ?>" required>
+                            </div>
+
+                            <!-- ****************************** bouton ************************** -->
+
+                            <div class="d-flex justify-content-center mb-2">
+                                <button type="submit" class="btn btn-ghost-1 ">Valider</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="container text-center fs-5 pt-5">
             <!-- Button trigger modal -->
             <button type="submit" name="clearCart" class="btn btn-ghost-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Valider la commande
@@ -105,7 +204,7 @@ include 'head.php';
                             // on utilise date_add pour ajouter 3 jours
                             // date_interval... => permet d'obtenir l'intervalle de temps souhaité pour l'ajouter
                             date_add($date, date_interval_create_from_date_string("3 days"));
-                            
+
                             // à ce stade, $date est directement modifiée
                             // je l'affiche en la formatant : jour mois année => 09-06-2023
                             echo date_format($date, "d-m-Y");
@@ -123,6 +222,7 @@ include 'head.php';
                 </div>
             </div>
         </div>
+
 
     </main>
 

@@ -370,41 +370,37 @@ function modifMotDePasse()
     $db = getConnection();
 
     //1.  je vérifie s'il y a des champs libres
-    if (checkEmptyFields()) {
+    if (!checkEmptyFields()) {
         echo '<script>alert(\'Veuillez remplir tous les champs obligatoires.\')</script>';
     } else {
-
 
         //2. je récupère le mot de passe existant (/!\ pas de variable dans un prepare)
         $query = $db->prepare('SELECT mot_de_passe FROM clients WHERE id = ?');
 
         $query->execute([$_SESSION['client']['id']]);
 
-        $motDePasseActuel = $query->fetch();
-
+        $actualPassword = $query->fetch();
 
         //3. je vérifie si le MDP actuel = MDP en base
-        if ($motDePasseActuel != $_POST['oldPassword']) {
+        if (!password_verify($_POST['oldPassword'], $actualPassword['mot_de_passe'])) {
             echo "Le mot de passe est erroné !";
         } else {
 
             //4. je vérifie que le mot de passe respecte les critères
-
             if (checkPassword($_POST['newPassword']) == false) {
                 echo '<script>alert(\'Veuillez respecter les conditions requises.\')</script>';
             } else {
 
                 //5. Hachage du nouveau mot de passe 
-                $motDePasseActuel = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
-
+                $nouveauMdpHache = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
 
                 //6. je prépare la mise à jour
-
                 $query = $db->prepare("UPDATE clients SET mot_de_passe=:mot_de_passe WHERE id=:id");
 
-                // 7. je l'exécute avec les bon paramètres
+                // 7. je l'exécute avec les bon paramètres (paramètres du "prepare")
                 $query->execute([
-                    "newPassword" => strip_tags($_POST['newPassword']),
+                    "mot_de_passe" =>  $nouveauMdpHache,
+                    "id" => $_SESSION['client']['id'],
                 ]);
 
                 // on renvoie un message de succès
@@ -413,7 +409,6 @@ function modifMotDePasse()
         }
     }
 }
-
 
 // ****************************************************** Vérifier la connexion *******************************
 
@@ -583,3 +578,56 @@ function calculerFraisPort()
     return $quantitytotal * 3; // je multiplie le total d'articles par 3 euros.
 
 }
+
+
+// ****************************************** Validation de la commande ***************************
+
+function  enregistrerCommande($prixTotal)
+{
+    // je me connecte à la bdd
+    $db = getConnection();
+
+    $numero = rand(1000000, 9999999);
+    $date_commande = date ("Y-m-d");
+    $prix = $prixTotal;
+
+    // je prépare ma requête : INSERT INTO "ma table" (le nom exact des champs de ma table) VALUES (:nom de chaque champ)
+    $query = $db->prepare("INSERT INTO commandes (id_client, numero, date_commande, prix) VALUES (:id_client, :numero, :date_commande, :prix)");
+
+    // je l'exécute avec le bon paramètre : mettre les variables dans l'ordre du VALUES ()
+    $query->execute([
+        "id_client" => $_SESSION['commande']['id_client'],
+        "numero" => $numero,
+        "date_commande" => $date_commande,
+        "prix" => $prix
+    ]);
+
+    // récupération de l'id de l'utilisateur créé
+    $id = $db->lastInsertId();
+
+    $id_commande = 
+    $id_article =
+    $_quantite = 
+
+
+    // je prépare ma requête : INSERT INTO "ma table" (le nom exact des champs de ma table) VALUES (:nom de chaque champ)
+    $query = $db->prepare("INSERT INTO commande_articles (id_commande, id_article, quantite) VALUES(:id_commande, :id_article, :quantite)");
+
+
+    foreach ($_SESSION['panier'] as $article) {}
+
+// je l'exécute avec le bon paramètre : mettre les variables dans l'ordre du VALUES ()
+    $query->execute([
+        "id_commande" => $id_commande,
+        "id_article" => $id_article,
+        "quantite" => $_quantite,
+    ]);
+    
+
+}
+
+ 
+
+    
+
+    
