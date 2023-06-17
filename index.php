@@ -51,10 +51,6 @@ include 'head.php';
     ?>
 
 
-
-
-
-
     <?php
     include 'header.php';
     ?>
@@ -63,10 +59,6 @@ include 'head.php';
         <div class="boutique">
             <h1>Boutique des beaux-arts</h1>
         </div>
-
-
-
-
 
 
         <div class="row list">
@@ -93,12 +85,12 @@ include 'head.php';
                                     <div class=\"button-card d-flex justify-content-around\">
                                         <form method=\"GET\" action=\"produit.php\">  
                                         <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
-                                        <input type=\"submit\" class=\"btn btn-ghost-1\" value=\"Détails produits\">
+                                        <input type=\"submit\" class=\"button-index btn btn-ghost-1\" value=\"Détails produits\">
                                         </form>
                                     
                                         <form method=\"GET\" action=\"panier.php\">  
                                         <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
-                                        <input type=\"submit\" class=\"btn btn-ghost-2\" value=\"Ajout panier\">
+                                        <input type=\"submit\" class=\"button-index btn btn-ghost-2\" value=\"Ajout panier\">
                                         </form>
                                     </div>
                                 </div>  

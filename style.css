@@ -114,7 +114,7 @@ nav {
 .navbar-brand {
     font-family: 'Satisfy', cursive;
     font-size: 200%;
-    padding: 20px 10px;
+    padding-top: 2%;
     color: brown;
 }
 
@@ -151,10 +151,6 @@ nav {
     background-color: darkgoldenrod;
 }
 
-.bouton {
-    text-decoration: none;
-
-}
 
 /* 4. PANIER et VALIDATION
 =================================== */
@@ -210,6 +206,7 @@ nav {
 
     padding: 2% 40%;
 }
+
 /* FOOTER
 =================================== */
 
@@ -217,6 +214,8 @@ footer {
     color: brown;
     padding-top: 4%;
 }
+
+
 
 
 /* =================MEDIA QUERIES 1400px================ */
@@ -229,28 +228,47 @@ footer {
     }
 }
 
-/* =================MEDIA QUERIES 1200px================ */
+/* =================MEDIA QUERIES 1227px================ */
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1227px) {
 
-    .button-nav {
-        margin: 0px 10px !important;
+    .navbar-brand {
+        font-size: 150%;
+        padding-top: 4%;
     }
 
+    .boutique h1 {
+        font-size: 400%;
+        margin-top: 13%;
+    }
 
     .button-card {
         display: flex;
         flex-direction: column;
     }
 
-    .btn {
-        margin: 10px 0px;
+    .button-index {
+        margin: 2% 0%;
     }
 
     .titre-article h1 {
         font-size: 350%;
         margin-top: 18%;
     }
+}
+
+/* =================MEDIA QUERIES 1102px================ */
+
+@media screen and (max-width: 1102px) {
+
+    .navbar-brand {
+        font-size: 150%;
+    }
+
+
+
+
+
 
 }
 
@@ -293,6 +311,7 @@ footer {
         margin-top: 18%;
     }
 }
+
 /* =================MEDIA QUERIES 991px================ */
 
 @media screen and (max-width: 991px) {

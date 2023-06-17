@@ -19,7 +19,7 @@ include 'head.php';
 
     <main>
         <div class="boutique">
-            <h1>Mon compte</h1>
+            <h1>Connexion / Inscription</h1>
         </div>
         <!-- ****************************** Connexion ******************************** -->
 
