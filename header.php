@@ -2,8 +2,8 @@
 
   <div class="container-fluid">
 
-    <a class="navbar-brand" href="./index.php"><img src="images/logo BBA.png" alt="Logo">
-    </a>
+    <!-- <a class="logo" href="./index.php">--><img src="images/logo_bba_crayon_2.jpg" alt="Logo">
+    <!--</a> -->
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

@@ -107,6 +107,11 @@ nav {
     background-color: darkgoldenrod;
 }
 
+img {
+    width: 15%;
+    border-radius: 15px;
+}
+
 .nav-item {
     font-size: 300%;
 }
@@ -120,11 +125,6 @@ nav {
 
 .navbar-brand:hover {
     color: white;
-}
-
-.navbar-brand img {
-    width: 25%;
-    border-radius: 25px;
 }
 
 .navbar-toggler {
@@ -223,25 +223,18 @@ footer {
 @media screen and (max-width: 1400px) {
 
     .boutique h1 {
-        font-size: 400%;
-        margin-top: 10%;
+        font-size: 450%;
     }
 }
 
-/* =================MEDIA QUERIES 1227px================ */
+/* =================MEDIA QUERIES 1203px================ */
 
-@media screen and (max-width: 1227px) {
-
-    .navbar-brand {
-        font-size: 150%;
-        padding-top: 4%;
-    }
+@media screen and (max-width: 1203px) {
 
     .boutique h1 {
         font-size: 400%;
-        margin-top: 13%;
     }
-
+  
     .button-card {
         display: flex;
         flex-direction: column;
@@ -257,43 +250,12 @@ footer {
     }
 }
 
-/* =================MEDIA QUERIES 1102px================ */
+/* =================MEDIA QUERIES 1086px================ */
 
-@media screen and (max-width: 1102px) {
+@media screen and (max-width: 1086px) {
 
-    .navbar-brand {
-        font-size: 150%;
-    }
-
-
-
-
-
-
-}
-
-/* =================MEDIA QUERIES 1099px================ */
-
-@media screen and (max-width: 1099px) {
-    .navbar-brand {
-        font-size: 150%;
-        padding: 20px 10px;
-    }
-
-    .boutique h1 {
-        font-size: 300%;
-        margin-top: 14%;
-    }
-
-}
-
-/* =================MEDIA QUERIES 1063px================ */
-
-@media screen and (max-width: 1063px) {
-
-    .boutique h1 {
-        font-size: 300%;
-        margin-top: 14%;
+   .boutique h1 {
+        font-size: 370%;
     }
 
 }
@@ -302,13 +264,8 @@ footer {
 
 @media screen and (max-width: 1016px) {
     .navbar-brand {
-        font-size: 120%;
+        font-size: 150%;
         padding: 25px 10px;
-    }
-
-    .boutique h1 {
-        font-size: 280%;
-        margin-top: 18%;
     }
 }
 
@@ -316,14 +273,8 @@ footer {
 
 @media screen and (max-width: 991px) {
 
-    .button-nav {
-        margin: 10px 350px !important;
-    }
-
-    .boutique h1 {
-        font-size: 250%;
-        margin-top: 17%;
-    }
+  
+   
 
     .titre-article h1 {
         margin-top: 21%;
