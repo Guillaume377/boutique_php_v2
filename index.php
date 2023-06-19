@@ -18,7 +18,7 @@ include 'head.php';
 
     <?php
 
-    //Déclencher la fonction "connexion"
+    //Déclencher la fonction "connexion" --> if (isset($_POST['nom d'un input'])) --> /!\ et pas le nom d'une fonction
     if (isset($_POST['email'])) {
         //var_dump($_POST);
         createConnection();
@@ -31,34 +31,38 @@ include 'head.php';
     }
 
     //Déclencher la fonction "modifMotDePasse"
-    if (isset($_POST['mot_de_passe'])) {
+    if (isset($_POST['newPassword'])) {
 
         modifMotDePasse();
     }
 
-    //Déclencher la fonction " enregistrerCommande" (validation de la commande)
-    if (isset($_POST['clearCart'])) {
-        //var_dump($_POST);
-        enregistrerCommande($prixTotal);
-    }
-    
     // je déclenche la fonction de vider le panier
     if (isset($_POST['commandeValidee'])) {
-        
+
+        enregistrerCommande();
         clearCart();
     }
-    
+
     ?>
 
 
     <?php
     include 'header.php';
     ?>
-    <main>
 
+    <main>
         <div class="boutique">
             <h1>Boutique des beaux-arts</h1>
         </div>
+
+        <div class="text-center">
+            <h4> <?php
+                    if (isset($_SESSION['client']['id'])) {
+                        echo "Bienvenue " . $_SESSION['client']['prenom'] . " " . $_SESSION['client']['nom'] . "!";
+                    }
+                    ?></h4>
+        </div>
+
 
 
         <div class="row list">
@@ -76,7 +80,7 @@ include 'head.php';
             //je lance ma boucle pour afficher une card bootstrap par article
             foreach ($articles as $article) {
                 echo "<div class=\"produit col-sm-4 p-5 h-75\">
-                                <div class=\"card text-center\">
+                            <div class=\"card text-center\">
                                 <img src=\"./images/" . $article['image'] . "\" class=\"card-img-top mx-auto w-75\" alt=\"...\">
                                 <div class=\"card-body\">
                                     <h5 class=\"card-title\">" . $article['nom'] . "</h5>
@@ -94,16 +98,14 @@ include 'head.php';
                                         </form>
                                     </div>
                                 </div>  
-                                </div>
-                            </div>";
+                            </div>
+                        </div>";
             }
             // Pour faire fonctionner le Foreach, je mets des "" (echo "... et ...</div>";) ainsi qu'un \ avant chaque " .
 
-          
             ?>
-
         </div>
-        </div>
+        
     </main>
 
     <?php

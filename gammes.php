@@ -57,7 +57,7 @@ foreach ($gammes as $gamme) {
                         
                         <form method=\"GET\" action=\"panier.php\">  
                         <input type=\"hidden\" name=\"productId\" value=\"" . $article['id'] . "\">
-                        <input type=\"submit\" class=\"btn btn-ghost-2\" value=\"Ajout panier\">
+                        <input type=\"submit\" class=\"button-index btn btn-ghost-2\" value=\"Ajout panier\">
                         </form>
                         </div>
                     </div>  

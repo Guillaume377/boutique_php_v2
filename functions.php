@@ -414,10 +414,6 @@ function modifMotDePasse()
 
 function createConnection()
 {
-
-    // je me connecte à la base
-    $db = getConnection();
-
     //je récupère le client s'il existe
     $client = emailExist();
 
@@ -429,10 +425,10 @@ function createConnection()
             $_SESSION['adresse'] = $address;
             echo '<script>alert(\'Vous êtes connectés!\')</script>';
         } else {
-            echo "Votre mot de passe est incorrect !";
+            echo '<script>alert(\'Votre mot de passe est incorrect !\')</script>';
         }
     } else {
-        echo "Vous n'avez pas de compte client !";
+        echo '<script>alert(\'Vous n\'avez pas de compte client !\')</script>';
     }
 }
 
@@ -582,52 +578,69 @@ function calculerFraisPort()
 
 // ****************************************** Validation de la commande ***************************
 
-function  enregistrerCommande($prixTotal)
+function  enregistrerCommande()
 {
     // je me connecte à la bdd
     $db = getConnection();
 
     $numero = rand(1000000, 9999999);
-    $date_commande = date ("Y-m-d");
-    $prix = $prixTotal;
+    $date_commande = date("Y-m-d");
 
     // je prépare ma requête : INSERT INTO "ma table" (le nom exact des champs de ma table) VALUES (:nom de chaque champ)
     $query = $db->prepare("INSERT INTO commandes (id_client, numero, date_commande, prix) VALUES (:id_client, :numero, :date_commande, :prix)");
 
     // je l'exécute avec le bon paramètre : mettre les variables dans l'ordre du VALUES ()
     $query->execute([
-        "id_client" => $_SESSION['commande']['id_client'],
+        "id_client" => $_SESSION['client']['id'],
         "numero" => $numero,
         "date_commande" => $date_commande,
-        "prix" => $prix
+        "prix" => calculerPrixTotal() + calculerFraisPort()
     ]);
 
-    // récupération de l'id de l'utilisateur créé
+    // récupération de l'id de la commande créé
     $id = $db->lastInsertId();
-
-    $id_commande = 
-    $id_article =
-    $_quantite = 
-
 
     // je prépare ma requête : INSERT INTO "ma table" (le nom exact des champs de ma table) VALUES (:nom de chaque champ)
     $query = $db->prepare("INSERT INTO commande_articles (id_commande, id_article, quantite) VALUES(:id_commande, :id_article, :quantite)");
 
 
-    foreach ($_SESSION['panier'] as $article) {}
+    foreach ($_SESSION['panier'] as $article) {
 
-// je l'exécute avec le bon paramètre : mettre les variables dans l'ordre du VALUES ()
-    $query->execute([
-        "id_commande" => $id_commande,
-        "id_article" => $id_article,
-        "quantite" => $_quantite,
-    ]);
-    
-
+        // je l'exécute avec le bon paramètre : mettre les variables dans l'ordre du VALUES ()
+        $query->execute([
+            "id_commande" => $id,
+            "id_article" => $article['id'],
+            "quantite" => $article['quantite'],
+        ]);
+    }
 }
 
- 
+// ****************************************** Récupération des commandes ***************************
 
-    
 
+function recupCommandes()
+{
+    // je me connecte à la bdd
+    $db = getConnection();
+
+    // /!\ JAMAIS DE VARIABLE PHP DIRECTEMENT DANS UNE REQUETE /!\ (risque d'injection SQL)
+
+    // je prépare ma requête
+    $query = $db->prepare('SELECT * FROM commandes WHERE id_client = ?');
+
+    // je l'exécute avec le bon paramètre
+    $query->execute([$_SESSION['client']['id']]);
+
+    // retourne les commandes sous forme de tableau associatif
+    return $query->fetchAll();
     
+}
+
+
+function recupDetailCommande ()
+{
+
+
+
+
+}

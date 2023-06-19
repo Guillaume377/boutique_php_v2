@@ -67,18 +67,21 @@ include 'head.php';
             foreach ($_SESSION['panier'] as $article) {
 
                 echo "<div class=\"container pt-5\"> 
-                <div class=\"row\">
-                   <div class=\"col-md-2\">
+                <div class=\"row d-flex justify-content-evenly\">
+                
+                
+                   <div class=\"infos_article col-md-2\">
                         <img src=\"./images/" . $article['image'] . "\" class=\" card-img-top\" alt=\"...\">
                    </div>
 
-                   <div class=\"col-md-2\">
+                   <div class=\"infos_article col-md-2\">
                         <h5 class=\"card-title\">" . $article['nom'] . "</h5>
                    </div>
 
-                   <div class=\"col-md-1\">
+                   <div class=\"infos_article col-md-1\">
                         <p class=\"card-text\">" . $article['prix'] . " €</p>
                    </div>
+                
 
                     <form class=\"col-lg-3\" action=\"panier.php\" method=\"POST\">
                         <div class=\"row pt-1\">
@@ -91,7 +94,7 @@ include 'head.php';
                         </div>    
                     </form>
 
-                    <form class=\"col-lg-2\" action=\"panier.php\" method=\"post\">
+                    <form class=\"deleted col-lg-2\" action=\"panier.php\" method=\"post\">
                         <input type=\"hidden\" name=\"deletedArticleId\" value=\"" . $article['id'] . "\">
                         <button type=\"submit\" class=\"btn btn-ghost-2 mt-2 mt-lg-0\">
                             Supprimer

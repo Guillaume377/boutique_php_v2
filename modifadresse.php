@@ -65,20 +65,20 @@ include 'head.php';
 
         </form>
 
-        <div class="container d-flex justify-content-between">
-            <div class="row text-center col-md-4 p-5">
+        <div class="row d-flex justify-content-between">
+            <div class="modification row text-center col-md-4 pt-5">
                 <i class="logo-font fa-solid fa-user" style="color: #B8860B;"></i>
                 <a href="./modifinfos.php" class="button-infos navbar-brand btn btn-ghost-2">Modifier mes informations</a>
             </div>
 
-            <div class="row text-center col-md-4 p-5">
+            <div class="modification row text-center col-md-4 pt-5">
                 <i class="logo-font fa-solid fa-key" style="color: #B8860B;"></i>
                 <a href="./modifmdp.php" class="button-infos navbar-brand btn btn-ghost-2">Modifier mon mot de passe</a>
             </div>
 
-            <div class="row text-center col-md-4 p-5">
+            <div class="modification row text-center col-md-4 pt-5">
                 <i class="logo-font fa-solid fa-rectangle-list" style="color: #B8860B;"></i>
-                <a href="./commande.php" class="button-infos navbar-brand btn btn-ghost-2">Modifier mes commandes</a>
+                <a href="./commande.php" class="button-infos navbar-brand btn btn-ghost-2">Mes commandes</a>
             </div>
         </div>
 

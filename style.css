@@ -6,11 +6,13 @@
 
 /* COLORS
     -default body text 
-    -h1                 brown
-    -h5                 darkgoldenrod
+    -h1                 brown A52A2A
+    -h4                 brown   
+    -h5                 darkgoldenrod B8860B
 
     -button             darkgoldenrod
                         brown
+
     -button:hover       white
 
     -icon               brown
@@ -28,7 +30,13 @@
     2. =HEADER
     3. =INDEX
     4. =PANIER et VALIDATION
-    5. =FOOTER
+    5. =INSCRIPTION
+    6. =MON COMPTE
+    7. =MODIFINFOS et MODIFADRESSE
+    8. =MODIFMDP
+    9. =FOOTER
+
+
 
 */
 
@@ -59,6 +67,10 @@ h3 {
     display: flex;
     justify-content: center;
     margin: 10% 0% 3% 0%;
+}
+
+h4 {
+    color: brown;
 }
 
 .btn-ghost-1 {
@@ -95,7 +107,7 @@ h3 {
     color: white;
     padding-bottom: 17%;
     padding-top: 5%;
-    margin-top: 7%;
+    margin-top: 6%;
     margin-bottom: 0%;
     font-size: 600%;
 }
@@ -107,8 +119,11 @@ nav {
     background-color: darkgoldenrod;
 }
 
-img {
+.logo {
     width: 15%;
+}
+
+img {
     border-radius: 15px;
 }
 
@@ -119,12 +134,16 @@ img {
 .navbar-brand {
     font-family: 'Satisfy', cursive;
     font-size: 200%;
-    padding-top: 2%;
+    padding-top: 3%;
     color: brown;
 }
 
 .navbar-brand:hover {
     color: white;
+}
+
+.deconnecter {
+    padding: 12% 2%;
 }
 
 .navbar-toggler {
@@ -162,10 +181,15 @@ img {
     border: 2px solid brown;
     border-radius: 5px;
     padding: 1%;
+    margin: 0% 20%;
 }
 
 .modifcoordos {
     padding: 2% 10%;
+}
+
+.btn-close {
+    margin-left: 0% !important;
 }
 
 /* 5. INSCRIPTION
@@ -204,10 +228,11 @@ img {
 =================================== */
 .modifmdp {
 
-    padding: 2% 40%;
+    padding: 2% 30%;
 }
 
-/* FOOTER
+
+/* 9. FOOTER
 =================================== */
 
 footer {
@@ -222,8 +247,14 @@ footer {
 
 @media screen and (max-width: 1400px) {
 
+    /* GLOBAL */
     .boutique h1 {
         font-size: 450%;
+    }
+
+    /*MON COMPTE*/
+    .button-infos {
+        font-size: 100% !important;
     }
 }
 
@@ -231,10 +262,12 @@ footer {
 
 @media screen and (max-width: 1203px) {
 
+    /* GLOBAL */
     .boutique h1 {
         font-size: 400%;
     }
-  
+
+    /* INDEX et GAMMES */
     .button-card {
         display: flex;
         flex-direction: column;
@@ -244,28 +277,37 @@ footer {
         margin: 2% 0%;
     }
 
+    /* PRODUIT */
     .titre-article h1 {
         font-size: 350%;
         margin-top: 18%;
     }
+
 }
 
 /* =================MEDIA QUERIES 1086px================ */
 
 @media screen and (max-width: 1086px) {
 
-   .boutique h1 {
+    /* GLOBAL */
+    .boutique h1 {
         font-size: 370%;
+        margin-top: 9%;
     }
-
 }
 
 /* =================MEDIA QUERIES 1016px================ */
 
 @media screen and (max-width: 1016px) {
+
+    /* HEADER */
     .navbar-brand {
         font-size: 150%;
-        padding: 25px 10px;
+        padding-top: 4%;
+    }
+
+    .deconnecter {
+        padding: 19.5% 2%;
     }
 }
 
@@ -273,15 +315,46 @@ footer {
 
 @media screen and (max-width: 991px) {
 
-  
-   
+    /* GLOBAL */
+    .boutique h1 {
+        font-size: 330%;
+        margin-top: 10%;
+    }
 
+    /* HEADER */
+    .navbar-brand {
+        margin: 2% 33%;
+        padding: 2%
+    }
+
+    li {
+        display: flex;
+        justify-content: center;
+    }
+
+    .deconnecter {
+        padding: 2.2% 11.3%;
+    }
+
+    /* PRODUIT */
     .titre-article h1 {
         margin-top: 21%;
     }
 
+    /* INSCRIPTION */
     .inscription {
         width: 100%;
+    }
+
+    /*MODIFINFOS*/
+    .button-infos {
+        margin: 0%;
+    }
+
+    /* PANIER */
+    .deleted {
+        display: flex;
+        justify-content: center;
     }
 }
 
@@ -289,42 +362,129 @@ footer {
 
 @media screen and (max-width: 875px) {
 
+    /* GLOBAL */
     .boutique h1 {
-        margin-top: 19%;
+        font-size: 300%;
     }
 
+    /* HEADER */
+    .deconnecter {
+        padding: 2.2% 10.5%;
+    }
+
+    /* INDEX */
     .produit {
         width: 50%;
     }
 
+    /* PRODUIT */
     .titre-article h1 {
         font-size: 300%;
         margin-top: 24%;
     }
 }
 
-/* =================MEDIA QUERIES 720px================ */
+/* =================MEDIA QUERIES 792px================ */
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 792px) {
 
+    /* GLOBAL */
     .boutique h1 {
-        margin-top: 23%;
+        font-size: 280%;
+        margin-top: 12%;
     }
 
+    /* HEADER */
+    .deconnecter {
+        padding: 2.2% 10%;
+    }
+
+    /* PRODUIT */
     .titre-article h1 {
         margin-top: 27%;
     }
 }
 
+/* =================MEDIA QUERIES 767px================ */
+
+@media screen and (max-width: 767px) {
+
+    /* HEADER */
+    .deconnecter {
+        padding: 2.2% 9.7%;
+    }
+
+    /* MODIFINFOS/MODIFADRESSE/MODIFMDP/COMMANDE */
+    .modification {
+        padding: 0% 30%;
+    }
+
+    /* PANIER */
+    .infos_article {
+        display: flex;
+        justify-content: center;
+    }
+
+    /* VALIDATION */
+
+    .card-title {
+        margin-right: 40%;
+    }
+
+    .totalcommande {
+        margin-left: 5%;
+    }
+
+    .validation {
+        padding: 5%;
+    }
+
+    .validation-card {
+        margin-left: 30%;
+    }
+
+    .button-valid {
+        margin-left: 10%;
+    }
+
+}
+
+/* =================MEDIA QUERIES 720px================ */
+
+@media screen and (max-width: 720px) {
+
+    /* GLOBAL */
+    .boutique h1 {
+        font-size: 250%;
+        margin-top: 14%;
+    }
+
+    /* HEADER */
+    .navbar-brand {
+        font-size: 120%;
+    }
+
+    .deconnecter {
+        padding: 2.2% 10.7%;
+    }
+}
+
+
 /* =================MEDIA QUERIES 656px================ */
 
 @media screen and (max-width: 656px) {
 
+    /* GLOBAL */
     .boutique h1 {
-        font-size: 200%;
-        margin-top: 26%;
+        font-size: 180%;
     }
 
+    /* HEADER */
+    .deconnecter {
+        padding: 2.2% 10%;
+    }
+
+    /* PRODUIT */
     .titre-article h1 {
         margin-top: 30%;
     }
@@ -335,13 +495,71 @@ footer {
 
 @media screen and (max-width: 615px) {
 
+    /* GLOBAL */
+    .boutique h1 {
+        margin-top: 18%;
+    }
+
+    /* HEADER */
+    .navbar-brand {
+        font-size: 100%;
+    }
+
+    .deconnecter {
+        padding: 2.2% 10.7%;
+    }
+
+    /* INDEX */
     .produit {
         width: 100%;
+    }
+
+    /* VALIDATION */
+
+    .card-title {
+        margin-right: 45%;
     }
 }
 
 
+/* =================MEDIA QUERIES 500px================ */
 
-/* =================MEDIA QUERIES 576px================ */
+@media screen and (max-width: 500px) {
 
-@media screen and (max-width: 576px) {}
+    /* GLOBAL */
+    .boutique h1 {
+        font-size: 160%;
+        margin-top: 22%;
+    }
+
+    /* HEADER */
+    .navbar-brand {
+        font-size: 80%;
+    }
+
+}
+
+/* =================MEDIA QUERIES 400px================ */
+
+@media screen and (max-width: 400px) {
+
+    /* GLOBAL */
+    .boutique h1 {
+        font-size: 140%;
+        margin-top: 24%;
+    }
+
+}
+
+
+/* =================MEDIA QUERIES 350px================ */
+
+@media screen and (max-width: 350px) {
+
+    /* GLOBAL */
+    .boutique h1 {
+        font-size: 120%;
+        margin-top: 14%;
+    }
+
+}

@@ -2,18 +2,14 @@
 
   <div class="container-fluid">
 
-    <!-- <a class="logo" href="./index.php">--><img src="images/logo_bba_crayon_2.jpg" alt="Logo">
-    <!--</a> -->
+    <a class="logo" href="./index.php"><img src="images/logo_bba_crayon_2.jpg" alt="Logo">
+    </a> 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <?php
-    if (isset($_SESSION['client']['id'])) {
-      echo "Bienvenue " . $_SESSION['client']['prenom'] . " " . $_SESSION['client']['nom'] . "!";
-    }
-    ?>
+ 
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -25,7 +21,7 @@
           echo "<a href=\"./moncompte.php\" class=\"navbar-brand btn btn-ghost-2\">Mon compte</a>";
 
           echo "<form method=\"POST\" action=\"./index.php\">
-          <button type=\"submit\" name=\"deconnexion\" class=\"navbar-brand btn btn-ghost-2\">
+          <button type=\"submit\" name=\"deconnexion\" class=\"deconnecter navbar-brand btn btn-ghost-2\">
             Déconnexion
           </button>
           </form>";
@@ -34,8 +30,8 @@
         }
         ?>
 
-        <li class="nav-item me-auto">
-          <a class="nav-link active" style="color:brown" aria-current="page" href="./panier.php"><i class="fa-solid fa-cart-shopping" style="color:brown"></i><?= count($_SESSION['panier']) ?>
+        <li class="nav-item">
+          <a class="nav-link active  " style="color:brown" aria-current="page" href="./panier.php"><i class="fa-solid fa-cart-shopping" style="color:brown"></i><?= count($_SESSION['panier']) ?>
           </a>
         </li>
       </ul>

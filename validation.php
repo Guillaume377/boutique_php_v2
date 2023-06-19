@@ -48,8 +48,8 @@ include 'head.php';
 
             foreach ($_SESSION['panier'] as $article) {
 
-                echo "<div class=\"container pt-5\"> 
-                    <div class=\"row\">
+                echo "<div class=\"validation row pt-5\"> 
+                    <div class=\"validation-card row d-flex justify-content-center\">
                         <div class=\"col-md-2\">
                         <img src=\"./images/" . $article['image'] . "\" class=\" card-img-top\" alt=\"...\">
                     </div>
@@ -79,7 +79,7 @@ include 'head.php';
 
         ?>
 
-        <div class="container text-center fs-5">
+        <div class="totalcommande container text-center fs-5">
             <div class="d-flex flex-column m-2">
                 Prix total : <?= $total ?> €
             </div>
@@ -171,7 +171,7 @@ include 'head.php';
         
         <div class="container text-center fs-5 pt-5">
             <!-- Button trigger modal -->
-            <button type="submit" name="clearCart" class="btn btn-ghost-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="submit" name="clearCart" class="button-valid btn btn-ghost-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Valider la commande
             </button>
         </div>
