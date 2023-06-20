@@ -46,7 +46,7 @@ include 'head.php';
                         <td>" . $commande['prix'] . "</td>
                         <td>
                             <form method=\"POST\" action=\"./detailscommande.php\">
-                            <input type =\"hidden\" name=\"detail\">
+                            <input type=\"hidden\" name=\"commandeId\" value=\"". $commande['id'] ."\">
                             <button type=\"submit\" class=\"navbar-brand btn btn-ghost-2\">
                                  Détails
                             </button>

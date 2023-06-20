@@ -218,7 +218,7 @@ function validInscription()
                     $query = $db->prepare("INSERT INTO clients (nom, prenom, email, mot_de_passe) VALUES (:nom, :prenom, :email, :mot_de_passe)");
 
 
-                    // je l'exécute avec le bon paramètre : mettre les variables dans l'ordre du VALUES (:nom, :prenom, :email, :mot_de_passe)
+                    // je l'exécute avec le bon paramètre : mettre les variables dans l'ordre (pas obligatoire dans la SYNTAXE 2) du VALUES (:nom, :prenom, :email, :mot_de_passe) 
 
                     $query->execute([
                         "nom" => strip_tags($nom),
@@ -256,7 +256,7 @@ function creatAddress($user_id)
 
     $query = $db->prepare("INSERT INTO adresses (id_client, adresse, code_postal, ville) VALUES (:id_client, :adresse, :code_postal, :ville)");
 
-    // je l'exécute avec le bon paramètre : mettre les variables dans l'ordre du VALUES ()
+    // je l'exécute avec le bon paramètre : mettre les variables dans l'ordre du VALUES (pas obligatoire)
 
     $query->execute([
         "id_client" => $user_id,
@@ -284,7 +284,7 @@ function modifinfos()
         } else {
 
             // je prépare ma requête : MISE A JOUR des informations
-            $query = $db->prepare("UPDATE clients SET nom=:nom, prenom=:prenom, email=:email WHERE id=:id");
+            $query = $db->prepare("UPDATE clients SET nom=:nom, prenom=:prenom, email=:email WHERE id=:id"); // /!\ ne pas oublier le "WHERE"
 
             // je l'exécute avec les bons paramètres
             $query->execute([
@@ -410,7 +410,7 @@ function modifMotDePasse()
     }
 }
 
-// ****************************************************** Vérifier la connexion *******************************
+// ****************************************************** Connecter l'utilisateur *******************************
 
 function createConnection()
 {
@@ -576,7 +576,7 @@ function calculerFraisPort()
 }
 
 
-// ****************************************** Validation de la commande ***************************
+// ****************************************** Validation (sauvegarde) de la commande ***************************
 
 function  enregistrerCommande()
 {
@@ -597,12 +597,11 @@ function  enregistrerCommande()
         "prix" => calculerPrixTotal() + calculerFraisPort()
     ]);
 
-    // récupération de l'id de la commande créé
+    // récupération de l'id de la commande créée
     $id = $db->lastInsertId();
 
     // je prépare ma requête : INSERT INTO "ma table" (le nom exact des champs de ma table) VALUES (:nom de chaque champ)
     $query = $db->prepare("INSERT INTO commande_articles (id_commande, id_article, quantite) VALUES(:id_commande, :id_article, :quantite)");
-
 
     foreach ($_SESSION['panier'] as $article) {
 
@@ -633,14 +632,24 @@ function recupCommandes()
 
     // retourne les commandes sous forme de tableau associatif
     return $query->fetchAll();
-    
 }
 
+// ****************************************** Récupération des articles pour le détail commande ***************************
 
-function recupDetailCommande ()
+function recupArticlesCommande()
 {
+    // je me connecte à la bdd
+    $db = getConnection();
 
+    // je récupère les articles de chaque commande en faisant in INNER JOIN
+    $query = $db->prepare('SELECT * FROM commande_articles as ca
+    INNER JOIN articles as a
+    ON ca.id_article = a.id
+    WHERE id_commande = ?');
 
+    // je l'exécute avec le bon paramètre
+    $query->execute([$_POST['commandeId']]);
 
-
+    // retourne les commandes sous forme de tableau associatif
+    return $query->fetchAll();
 }
